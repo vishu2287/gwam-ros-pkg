@@ -1,0 +1,15 @@
+<package>
+  <description brief="guardian_2dnav">
+  Contains all the configuration files needed to execute the AMCL and SLAM navigation algorism in the robot. 
+  </description>
+  <author>Marc Benetó</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/guardian_2dnav</url>
+  <depend package="move_base"/>
+  <depend package="guardian_tf"/>
+  <depend package="guardian_odometry"/>
+
+</package>
+
+

@@ -1,0 +1,8 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~exposure" : \b [double] exposure time (us) min: 0.0, default: 100000.0, max: 10000000000.0
+- \b "~gain" : \b [int] gain (dB) min: 0, default: 350, max: 100000
+- \b "~frame_id" : \b [str] the camera frame min: , default: camera, max: 
+

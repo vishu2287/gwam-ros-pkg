@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+
+	<node type="guardian_node" name="guardian_node" pkg="guardian_node">
+		<param name="motor_dev" value="/dev/ttyS0" type="string"/>
+	</node>
+  
+	<include file="$(find guardian_node)/launch/guardian_joy.launch" />
+	
+
+</launch>

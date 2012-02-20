@@ -1,0 +1,16 @@
+<package>
+  <description brief="guardian_tf">
+  Publishes the static transforms (relating to chassis) of the robot.
+  </description>
+  <author>Marc Benetó</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/guardian_tf</url>
+  <depend package="roscpp"/>
+  <depend package="tf"/>
+  <depend package="geometry_msgs"/>
+  <depend package="nav_msgs"/>
+
+</package>
+
+

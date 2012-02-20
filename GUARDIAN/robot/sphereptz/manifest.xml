@@ -1,0 +1,17 @@
+<package>
+  <description brief="sphereptz">
+
+     sphereptz
+
+  </description>
+  <author>Roberto</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/sphereptz</url>
+  <depend package="roscpp"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+
+</package>
+
+

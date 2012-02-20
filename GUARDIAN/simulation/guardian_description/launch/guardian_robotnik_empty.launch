@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- start world -->
+  <include file="$(find guardian_description)/Media/launch/robotnik_empty.launch"/>
+
+  <!-- start controller manager -->
+  <include file="$(find pr2_controller_manager)/controller_manager.launch"/>
+
+  <!-- send guardian.urdf to param server -->
+  <!--param name="robot_description" textfile="/home/robotnik/Escritorio/guardian/guardian_description/urdf/guardian.urdf" /-->
+  <param name="robot_description" textfile="$(find guardian_description)/urdf/guardian.urdf" />
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <!--node name="spawn_single_link" pkg="gazebo_tools" type="gazebo_model" args="-p robot_description spawn -z 2" respawn="false" output="screen" /-->
+  <node name="spawn_object" pkg="gazebo" type="spawn_model" args="-urdf -param robot_description -x -9.25 -y -3.25 -z 0.5 -model guardian" respawn="false" output="screen" />
+
+  <!--guardian_controller.yaml-->
+  <rosparam file="$(find guardian_controller)/guardian_controller.yaml" command="load"/>
+
+  <param name="pr2_controller_manager/joint_state_publish_rate" value="100.0" />
+  <!-- node name = spawn_guardian_controller-->
+  <node name="guardian_controller" pkg="pr2_controller_manager" type="spawner" args="guardian_controller" respawn="false" output="screen"/>
+  	
+</launch>

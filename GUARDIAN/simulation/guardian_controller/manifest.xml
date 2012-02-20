@@ -1,0 +1,23 @@
+<package>
+  <description brief="guardian_controller"> 
+  Relate the 4-wheels joints with each motor, apply the control 
+  correction in closed loop for the motor and set the command 
+  received by the joystick/keyboard teleop node.
+  </description>
+  <author>Marc Benetó</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/guardian_controller</url>
+  <depend package="pr2_controller_interface"/>
+  <depend package="pr2_mechanism_model"/>
+  <depend package="pluginlib"/>
+  <depend package="roscpp"/> 
+  <depend package="tf"/>
+  <depend package="nav_msgs"/>
+  <export>
+    <pr2_controller_interface plugin="${prefix}/controller_plugins.xml" />
+  </export>
+
+</package>
+
+

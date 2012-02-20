@@ -1,0 +1,16 @@
+<package>
+  <description brief="guardian_complete">
+
+     guardian_complete
+
+  </description>
+  <author>guardian-wam</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/guardian_complete</url>
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+
+</package>
+
+

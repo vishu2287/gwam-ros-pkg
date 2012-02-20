@@ -1,0 +1,16 @@
+<package>
+  <description brief="guardian_joystick_teleop">
+  Allows to use a joystick with the guardian_controller, sending 
+  the messages received through the joystick input, correctly 
+  adapted, to the "guardian_controller/command" topic.
+  </description>
+  <author>Marc Benetó</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/guardian_joystick_teleop</url>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+  <depend package="geometry_msgs"/>
+</package>
+
+

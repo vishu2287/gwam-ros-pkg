@@ -1,0 +1,5 @@
+<library path="lib/libguardian_controller_lib">
+  <class name="guardian_controller/GuardianControllerPlugin" 
+         type="guardian_controller_ns::GuardianControllerClass"           
+         base_class_type="pr2_controller_interface::Controller" />
+</library>

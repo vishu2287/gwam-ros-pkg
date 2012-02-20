@@ -1,0 +1,14 @@
+<stack>
+  <description brief="guardian_real">guardian_real</description>
+  <author>Maintained by robotnik</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Robots/Guardian</url>
+  <depend stack="common_msgs" /> <!-- nav_msgs, geometry_msgs -->
+  <depend stack="geometry" /> <!-- tf -->
+  <depend stack="guardian" /> <!-- guardian_odometry, guardian_tf -->
+  <depend stack="navigation" /> <!-- move_base -->
+  <depend stack="ros" />
+  <depend stack="ros_comm" /> <!-- roscpp -->
+
+</stack>

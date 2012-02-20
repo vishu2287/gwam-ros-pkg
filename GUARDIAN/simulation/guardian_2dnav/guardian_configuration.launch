@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="guardian_odometry" type="guardian_odometry" name="guardian_odometry_node" output="screen"/>
+  <node pkg="guardian_tf" type="guardian_tf" name="guardian_tf_node" output="screen"/>
+</launch>

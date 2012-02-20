@@ -1,0 +1,22 @@
+<package>
+  <description brief="guardian_odometry">
+  Computes the odometry of the robot using the wheel movements and a IMU. 
+  Publish these odometry to /odom, which is feedbacked with a kalman filter 
+  to obtain a better trasformation through /map and /odom frame.
+  </description>
+  <author>Marc Benetó</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/guardian_odometry</url>
+  <depend package="roscpp"/>
+  <!--depend package="guardian_description"/-->
+  <depend package="guardian_controller"/>
+  <depend package="nav_msgs"/>
+  <depend package="tf"/>
+  <depend package="pr2_mechanism_model"/>
+  <depend package="pr2_controller_interface"/>
+  <depend package="sensor_msgs"/>
+
+</package>
+
+
