@@ -1,0 +1,19 @@
+<package>
+  <description brief="guardian_hardware_interface">
+
+     guardian_hardware_interface
+
+  </description>
+  <author>robotnik</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/guardian_hardware_interface</url>
+  <depend package="roscpp"/>
+  <depend package="geometry_msgs"/>
+  <export>
+     <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -Wl,-rpath,${prefix}/lib -lguardian_hardware_interface"/>
+  </export>
+
+</package>
+
+

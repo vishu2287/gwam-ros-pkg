@@ -1,0 +1,22 @@
+<package>
+  <description brief="guardian_description">
+  This stack contains the urdf, meshes, and other elements 
+  needed in the visual and physical description of the robot.
+  </description>
+  <author>Marc Benetó</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/guardian_description</url>
+  <depend package ="urdf"/>
+  <depend package="convex_decomposition"/>
+  <depend package="gazebo"/>
+  <depend package="ivcon"/>
+  <depend package="collada_urdf"/>
+
+  <export>
+    <gazebo gazebo_media_path="${prefix}" />
+  </export>
+
+</package>
+
+

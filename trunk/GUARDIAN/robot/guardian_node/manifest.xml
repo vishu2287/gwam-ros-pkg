@@ -1,0 +1,19 @@
+<package>
+  <description brief="guardian_node">
+
+     guardian_node
+
+  </description>
+  <author>robotnik</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/guardian_node</url>
+  <depend package="guardian_hardware_interface"/>
+  <depend package="roscpp"/>
+  <depend package="tf"/>
+  <depend package="nav_msgs"/>
+  <depend package="roscpp"/>
+
+</package>
+
+
