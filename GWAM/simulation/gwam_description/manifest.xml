@@ -1,0 +1,14 @@
+<package>
+  <description brief="gwam_description">
+
+     gwam_description
+
+  </description>
+  <author>Kyle Maroney</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/gwam_description</url>
+
+</package>
+
+
