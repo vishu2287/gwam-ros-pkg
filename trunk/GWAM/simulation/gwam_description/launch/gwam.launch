@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find gazebo_worlds)/launch/empty_world.launch"/>
+  <param name="spawn_gwam" textfile="$(find gwam_description)/urdf/gwam.urdf" />
+  <node name="spawn_gwam_object" pkg="gazebo" type="spawn_model" args="-urdf -param spawn_gwam -model gwam" respawn="false" output="screen" />
+</launch>

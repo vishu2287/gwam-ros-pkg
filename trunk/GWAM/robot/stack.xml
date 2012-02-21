@@ -1,0 +1,9 @@
+<stack>
+  <description brief="robot">robot</description>
+  <author>Maintained by Kyle Maroney</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/robot</url>
+  <depend stack="ros" />
+
+</stack>

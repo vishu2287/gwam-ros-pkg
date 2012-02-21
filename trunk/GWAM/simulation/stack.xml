@@ -1,0 +1,9 @@
+<stack>
+  <description brief="simulation">simulation</description>
+  <author>Maintained by Kyle Maroney</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/simulation</url>
+  <depend stack="ros" />
+
+</stack>
