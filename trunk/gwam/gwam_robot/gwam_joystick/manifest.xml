@@ -1,0 +1,17 @@
+<package>
+  <description brief="gwam_joystick">
+
+     gwam_joystick
+
+  </description>
+  <author>Roberto</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/gwam_joystick</url>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+  <depend package="modbus_io"/>
+
+</package>
+
+
