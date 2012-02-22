@@ -15,7 +15,6 @@
        xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics">
 
   <!-- BASE FOOTPRINT -->
-
   <!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin,
              navigation stack depends on this frame -->
   <link name="base_footprint">
@@ -57,7 +56,6 @@
 
 
   <!-- BASE_LINK (RED) -->
-
   <link name="base_link">
     <inertial>
       <mass value="70.0" />
@@ -67,13 +65,13 @@
     <visual>
        <origin xyz="0 0 0" rpy="0 0 0" />
        <geometry>
-	 <mesh filename="package://guardian_description/meshes/chassis.stl"/>
+	 <mesh filename="package://guardian_description/meshes/chassis.mesh"/>
        </geometry>
     </visual>
     <collision>
        <origin xyz="0 0 0.06" rpy="0 0 0 " />
        <geometry>
-         <!--mesh filename="package://guardian_description/meshes/chassis.stl"/-->
+         <!--mesh filename="package://guardian_description/meshes/chassis.mesh"/-->
 	 <box size = "1.0 0.4 0.2"/>
        </geometry>
     </collision>     
@@ -84,47 +82,114 @@
   </gazebo>
 
 
-  <!-- BACK LEFT WHEEL (BLACK) -->
-
-  <link name="back_left_wheel">
+  <!-- LEFT TRACK (BLACK) -->
+  <link name="left_track">
     <inertial>
       <mass value="1.250" />
       <origin xyz="0 0 0" /> 
-      <!--inertia  ixx="0.0109375" ixy="0.0"  ixz="0.0"  iyy="0.021125"  iyz="0.0"  izz="0.0109375" /-->
       <inertia  ixx="0.0109375" ixy="0.0"  ixz="0.0"  iyy="0.021125"  iyz="0.0"  izz="0.0109375" />
-      <!--inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/-->
-      <!--inertia  ixx="0.00584" ixy="0.0"  ixz="0.0"  iyy="0.00584"  iyz="0.0"  izz="0.01072"/-->
     </inertial>
     <visual>
        <origin xyz="0 0 0" rpy="0 0 0" /> 
        <geometry>
-	 <!--mesh filename="package://guardian_description/meshes/wheel.stl"/-->
-	 <mesh filename="package://guardian_description/meshes/wheel_link.dae" scale="1.8 1.8 1.8"/>
+	 <mesh filename="package://guardian_description/meshes/track.mesh"/>
        </geometry>
 	<material name="black">
-		<color rgba="0 0 0 1"/>
+		<color rgba="0.1 0.1 0.1 1"/>
       	</material>
     </visual>
     <collision>
        <origin xyz="0 0 0" rpy="0 0 0" />
        <geometry>
-         <!--mesh filename="package://guardian_description/meshes/wheel.stl"/-->
-	 <mesh filename="package://guardian_description/meshes/wheel_link.dae" scale="1.8 1.8 1.8"/>
+         <mesh filename="package://guardian_description/meshes/track.mesh"/>
+       </geometry>
+    </collision>
+  </link>
+  <gazebo reference="left_track">
+    <material>Gazebo/Black</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <joint name="joint_left_track" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_track"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0" /> 
+    <!-- axis xyz="0 1 0" rpy="0 0 0" / -->
+  </joint>
+
+
+  <!-- RIGHT TRACK (BLACK) -->
+  <link name="right_track">
+    <inertial>
+      <mass value="1.250" />
+      <origin xyz="0 0 0" /> 
+      <inertia  ixx="0.0109375" ixy="0.0"  ixz="0.0"  iyy="0.021125"  iyz="0.0"  izz="0.0109375" />
+    </inertial>
+    <visual>
+       <origin xyz="0 0 0" rpy="0 0 0" /> 
+       <geometry>
+	 <mesh filename="package://guardian_description/meshes/track.mesh"/>
+       </geometry>
+	<material name="black">
+		<color rgba="0.1 0.1 0.1 1"/>
+      	</material>
+    </visual>
+    <collision>
+       <origin xyz="0 0 0" rpy="0 0 0" />
+       <geometry>
+         <mesh filename="package://guardian_description/meshes/track.mesh"/>
+       </geometry>
+    </collision>
+  </link>
+  <gazebo reference="right_track">
+    <material>Gazebo/Black</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <joint name="joint_right_track" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_track"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 3.1415926535" /> 
+    <!-- axis xyz="0 1 0" rpy="0 0 0" / -->
+  </joint>
+
+
+
+  <!-- BACK LEFT WHEEL (GREY) -->
+  <link name="back_left_wheel">
+    <inertial>
+      <mass value="1.250" />
+      <origin xyz="0 0 0" /> 
+      <inertia  ixx="0.0109375" ixy="0.0"  ixz="0.0"  iyy="0.021125"  iyz="0.0"  izz="0.0109375" />
+    </inertial>
+    <visual>
+       <origin xyz="0 0 0" rpy="0 0 3.1416" /> 
+       <geometry>
+	 <mesh filename="package://guardian_description/meshes/wheel.mesh"/>
+       </geometry>
+	<material name="grey">
+		<color rgba="0.3 0.3 0.3 1"/>
+      	</material>
+    </visual>
+    <collision>
+       <origin xyz="0 0 0" rpy="0 0 0" />
+       <geometry>
+         <mesh filename="package://guardian_description/meshes/wheel.mesh"/>
        </geometry>
     </collision>
   </link>
   <gazebo reference="back_left_wheel">
-    <mu1 value="50.0"/> <!-- 2.0 -->
-    <mu2 value="0.5"/> <!-- 0.5 -->
+    <mu1 value="50.0"/>
+    <mu2 value="0.5"/> 
     <fdir1 value="1 0 0"/>
-    <material>Gazebo/Black</material>
+    <material>Gazebo/Grey</material>
     <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
   <joint name="joint_back_left_wheel" type="continuous">
     <parent link="base_link"/>
     <child link="back_left_wheel"/>
-    <origin xyz="-0.30 0.25 0" rpy="0 0 0" /> 
+    <origin xyz="-0.30 0.265 0" rpy="0 0 0" /> 
     <axis xyz="0 1 0" rpy="0 0 0" />
     <limit effort="100" velocity="100"/>
     <joint_properties damping="0.0" friction="0.0"/>
@@ -139,7 +204,6 @@
 
 
   <!-- BACK RIGHT WHEEL (BLACK) -->
-
   <link name="back_right_wheel">
     <inertial>
       <mass value="1.250" />
@@ -149,18 +213,16 @@
     <visual>
        <origin xyz="0 0 0" rpy="0 0 0" /> 
        <geometry>
-         <!--mesh filename="package://guardian_description/meshes/wheel.stl"/-->
-	 <mesh filename="package://guardian_description/meshes/wheel_link.dae" scale="1.8 1.8 1.8"/>
+         <mesh filename="package://guardian_description/meshes/wheel.mesh"/>
        </geometry>
-	<material name="black">
-		<color rgba="0 0 0 1"/>
+	<material name="gray">
+		<color rgba="0.3 0.3 0.3 1"/>
       	</material>
     </visual>
     <collision>
        <origin xyz="0 0 0" rpy="0 0 0" /> 
        <geometry>
-         <!--mesh filename="package://guardian_description/meshes/wheel.stl"/-->
-	 <mesh filename="package://guardian_description/meshes/wheel_link.dae" scale="1.8 1.8 1.8"/>
+         <mesh filename="package://guardian_description/meshes/wheel.mesh"/>
        </geometry>
     </collision>
   </link>
@@ -168,14 +230,14 @@
     <mu1 value="50.0"/> <!-- 2.0 -->
     <mu2 value="0.5"/> <!-- 0.5 -->
     <fdir1 value="1 0 0"/>
-    <material>Gazebo/Black</material>
+    <material>Gazebo/Grey</material>
     <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
   <joint name="joint_back_right_wheel" type="continuous">
     <parent link="base_link"/>
     <child link="back_right_wheel"/>
-    <origin xyz="-0.30 -0.25 0" rpy="0 0 0" />
+    <origin xyz="-0.30 -0.265 0" rpy="0 0 0" />
     <axis xyz="0 1 0" />
     <limit effort="100" velocity="100"/>
     <joint_properties damping="0.0" friction="0.0"/>
@@ -188,9 +250,7 @@
      <motorTorqueConstant>1</motorTorqueConstant>
   </transmission>
 
-
   <!-- FRONT LEFT WHEEL (GREY) -->
-
   <link name="front_left_wheel">
     <inertial>
       <mass value="1.250" />
@@ -198,20 +258,18 @@
       <inertia  ixx="0.0109375" ixy="0.0"  ixz="0.0"  iyy="0.021125"  iyz="0.0"  izz="0.0109375" />
     </inertial>
     <visual>
-       <origin xyz="0 0 0" rpy="0 0 0" /> 
+       <origin xyz="0 0 0" rpy="0 0 3.1416" /> 
        <geometry>
-         <!--mesh filename="package://guardian_description/meshes/wheel.stl"/-->
-	 <mesh filename="package://guardian_description/meshes/wheel_link.dae" scale="1.8 1.8 1.8"/>
+         <mesh filename="package://guardian_description/meshes/wheel.mesh"/>
        </geometry>
-	<material name="gray">
-		<color rgba="0.5 0.5 0.5 1"/>
+	<material name="grey">
+		<color rgba="0.3 0.3 0.3 1"/>
       	</material>
     </visual>
     <collision>
        <origin xyz="0 0 0" rpy="0 0 0" /> 
        <geometry>
-         <!--mesh filename="package://guardian_description/meshes/wheel.stl"/-->
-	 <mesh filename="package://guardian_description/meshes/wheel_link.dae" scale="1.8 1.8 1.8"/>
+         <mesh filename="package://guardian_description/meshes/wheel.mesh"/>
        </geometry>
     </collision>
   </link>
@@ -226,7 +284,7 @@
   <joint name="joint_front_left_wheel" type="continuous">
     <parent link="base_link"/>
     <child link="front_left_wheel"/>
-    <origin xyz="0.30 0.25 0" rpy="0 0 0" />
+    <origin xyz="0.30 0.265 0" rpy="0 0 0" />
     <axis xyz="0 1 0" />
     <limit effort="100" velocity="100"/>
     <joint_properties damping="0.0" friction="0.0"/>
@@ -241,7 +299,6 @@
 
 
   <!-- FRONT RIGHT WHEEL (GREY) -->
-
   <link name="front_right_wheel">
     <inertial>
       <mass value="1.250" />
@@ -251,18 +308,16 @@
     <visual>
        <origin xyz="0 0 0" rpy="0 0 0" /> 
        <geometry>
-         <!--mesh filename="package://guardian_description/meshes/wheel.stl"/-->
-	 <mesh filename="package://guardian_description/meshes/wheel_link.dae" scale="1.8 1.8 1.8"/>
+         <mesh filename="package://guardian_description/meshes/wheel.mesh"/>
        </geometry>
 	<material name="grey">
-		<color rgba="0.5 0.5 0.5 1"/>
+		<color rgba="0.3 0.3 0.3 1"/>
       	</material>
     </visual>
     <collision>
        <origin xyz="0 0 0" rpy="0 0 0" /> 
        <geometry>
-         <!--mesh filename="package://guardian_description/meshes/wheel.stl"/--> 
-	 <mesh filename="package://guardian_description/meshes/wheel_link.dae" scale="1.8 1.8 1.8"/>
+         <mesh filename="package://guardian_description/meshes/wheel.mesh"/> 
        </geometry>
     </collision>
   </link>
@@ -277,7 +332,7 @@
   <joint name="joint_front_right_wheel" type="continuous">
     <parent link="base_link"/>
     <child link="front_right_wheel"/>
-    <origin xyz="0.30 -0.25 0" rpy="0 0 0" />
+    <origin xyz="0.30 -0.265 0" rpy="0 0 0" />
     <axis xyz="0 1 0" />
     <limit effort="100" velocity="100"/>
     <joint_properties damping="0.0" friction="0.0"/>
@@ -292,7 +347,6 @@
 
 
   <!-- HOKUYO SENSOR -->
-
   <joint name="hokuyo_laser_joint" type="fixed">
      <axis xyz="0 1 0" />
      <origin xyz="0.12 0 0.285"/>
