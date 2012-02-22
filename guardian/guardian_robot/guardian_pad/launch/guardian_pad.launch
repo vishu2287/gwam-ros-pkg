@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
 
  <!-- joy node -->
@@ -6,15 +7,21 @@
     <param name="deadzone" value="0.12" />
   </node>
 
- <!-- Axes -->
+  # Axes
   <param name="cmd_topic" value="/guardian_node/command" type="string"/>
   <param name="axis_linear" value="1" type="int"/>
-  <param name="axis_angular" value="2" type="int"/>  <!-- value = 0 -->
+  <param name="axis_angular" value="2" type="int"/>  #  value = 0 
   <param name="scale_linear" value="1" type="double"/>
   <param name="scale_angular" value="2" type="double"/>
-  <param name="sim_mode" value="false" type="bool"/>
+  <param name="dead_man_button" value="1" type="int"/>
+  <param name="button_output_1" value="7" type="int"/>
+  <param name="button_output_2" value="8" type="int"/>
+  <param name="output_1" value="1" type="int"/>
+  <param name="output_2" value="2" type="int"/>
 
   <node name="guardian_pad" pkg="guardian_pad" type="guardian_pad" />
+  <!-- node name="guardian_pad" pkg="guardian_pad" type="guardian_pad" args="load thrustmaster.yaml" / --> 
+  <!-- node name="guardian_pad" pkg="guardian_pad" type="guardian_pad" args="load logitech.yaml" / --> 
 
 </launch>
 

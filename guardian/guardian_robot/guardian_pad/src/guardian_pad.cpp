@@ -36,6 +36,9 @@
 #include <sensor_msgs/Joy.h>
 #include <geometry_msgs/Twist.h>
 
+//#include <modbus_io/modbus_io.h>
+#include <modbus_io/write_digital_output.h>
+
 ////////////////////////////////////////////////////////////////////////
 //                               NOTE:                                //
 // This configuration is made for a THRUSTMASTER T-Wireless 3in1 Joy  //
@@ -61,7 +64,12 @@ private:
   std::string cmd_topic_;
   double current_vel;
   bool sim_mode_;
-  
+  int dead_man_button_;
+  int speed_up_button_, speed_down_button_;
+  int button_output_1_, button_output_2_;
+  int output_1_, output_2_;
+
+  ros::ServiceClient modbus_write_do_client;  
 };
 
 
@@ -77,7 +85,13 @@ GuardianPad::GuardianPad():
   nh_.param("scale_angular", a_scale_, a_scale_);
   nh_.param("scale_linear", l_scale_, l_scale_);
   nh_.param("cmd_topic", cmd_topic_, cmd_topic_);
-  nh_.param("sim_mode", sim_mode_, sim_mode_);
+  nh_.param("dead_man_button", dead_man_button_, dead_man_button_);
+  nh_.param("speed_up_button", speed_up_button_, speed_up_button_);  //4 Thrustmaster
+  nh_.param("speed_down_button", speed_down_button_, speed_down_button_); //5 Thrustmaster
+  nh_.param("button_output_1", button_output_1_, button_output_1_);
+  nh_.param("button_output_2", button_output_2_, button_output_2_);
+  nh_.param("output_1", output_1_, output_1_);
+  nh_.param("output_2", output_2_, output_2_);
 
   // Publish through the node handle Twist type messages to the guardian_controller/command topic
   vel_pub_ = nh_.advertise<geometry_msgs::Twist>(cmd_topic_, 1);
@@ -85,62 +99,48 @@ GuardianPad::GuardianPad():
   // Listen through the node handle sensor_msgs::Joy messages from joystick (these are the orders that we will send to guardian_controller/command)
   pad_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 10, &GuardianPad::padCallback, this);
 
+  // Request service to activate / deactivate digital I/O
+  modbus_write_do_client = nh_.serviceClient<modbus_io::write_digital_output>("/modbous_io_node/write_digital_output");
+
 }
 
 void GuardianPad::padCallback(const sensor_msgs::Joy::ConstPtr& joy)
 {
   geometry_msgs::Twist vel;
-
-  // Set the current velocity
-  if (joy->buttons[4] == 1 && current_vel > 0.1){
-	current_vel = current_vel - 0.1;
-	ROS_ERROR("Velocity: %f%%", current_vel*100.0);
-  }else if (joy->buttons[5] == 1 && current_vel < 0.9){
-	current_vel = current_vel + 0.1;
-	ROS_ERROR("Velocity: %f%%", current_vel*100.0);
-  }
-
-  // If we detect a significant Y movement (move left/right), we will actuate in consequence.
-  /*
-  if (joy->axes[0]>0.95 && joy->axes[1]<0.2 && joy->axes[2]<0.2){  		// turning left
-	vel.linear.x=0.0;
-	vel.linear.y=l_scale_*joy->axes[0];
-	vel.linear.z=0.0;
-	vel.angular.x = 0.0;
-        vel.angular.y = 0.0;
-  	vel.angular.z = 0.0;
-	vel_pub_.publish(vel);
-  }else if (joy->axes[0]<-0.95 && joy->axes[1]>-0.2 && joy->axes[2]>-0.2 ){ 	// turning right
-	vel.linear.x=0.0;
-	vel.linear.y=l_scale_*joy->axes[0];
-	vel.linear.z=0.0;
-	vel.angular.x = 0.0;
-        vel.angular.y = 0.0;
-  	vel.angular.z = 0.0;
-	vel_pub_.publish(vel);
-  }else{
-  */
-	if (sim_mode_){
-  	   vel.angular.x = current_vel*(a_scale_*joy->axes[angular_])/2;
-  	   vel.angular.y = current_vel*(a_scale_*joy->axes[angular_])/2; // Divided by 2 to adapt the velocities (without this, was too fast)
-  	   vel.angular.z = current_vel*(a_scale_*joy->axes[angular_])/2;
-  	   vel.linear.x = current_vel*4*l_scale_*joy->axes[linear_];
-  	   vel.linear.y = current_vel*4*l_scale_*joy->axes[linear_]; 	// Multiplied by 2 to adapt the velocities (without this was too slow)
-  	   vel.linear.z = current_vel*4*l_scale_*joy->axes[linear_];
-  	   vel_pub_.publish(vel);	
-	}else{
-	   vel.angular.x = current_vel*2.25*(a_scale_*joy->axes[angular_])/2;
-  	   vel.angular.y = current_vel*2.25*(a_scale_*joy->axes[angular_])/2;
-  	   vel.angular.z = current_vel*2.25*(a_scale_*joy->axes[angular_])/2;
-	   vel.linear.x = current_vel*1.25*l_scale_*joy->axes[linear_];
-  	   vel.linear.y = current_vel*1.25*l_scale_*joy->axes[linear_];
-  	   vel.linear.z = current_vel*1.25*l_scale_*joy->axes[linear_];
-  	   vel_pub_.publish(vel);
+  
+  // Actions dependant on dead-man button
+  if (joy->buttons[dead_man_button_] == 1) {
+	// Set the current velocity level
+	if (joy->buttons[speed_up_button_] == 1 && current_vel > 0.1){
+	  current_vel = current_vel - 0.1;
+	  ROS_ERROR("Velocity: %f%%", current_vel*100.0);
+	}else if (joy->buttons[speed_down_button_] == 1 && current_vel < 0.9){
+	  current_vel = current_vel + 0.1;
+	  ROS_ERROR("Velocity: %f%%", current_vel*100.0);
 	}
-  //}
+	vel.angular.x = current_vel*(a_scale_*joy->axes[angular_]);
+	vel.angular.y = current_vel*(a_scale_*joy->axes[angular_]);
+	vel.angular.z = current_vel*(a_scale_*joy->axes[angular_]);
+	vel.linear.x = current_vel*l_scale_*joy->axes[linear_];
+	vel.linear.y = current_vel*l_scale_*joy->axes[linear_];
+	vel.linear.z = current_vel*l_scale_*joy->axes[linear_];
 
+	if (joy->buttons[button_output_1_] == 1) {
+		modbus_io::write_digital_output modbus_wdo_srv;
+		modbus_wdo_srv.request.output = output_1_;
+		modbus_wdo_srv.request.value = true;
+		modbus_write_do_client.call( modbus_wdo_srv );
+		}
+	else {
+	     }
+	}
+   else {
+	vel.angular.x = 0.0;	vel.angular.y = 0.0; vel.angular.z = 0.0;
+	vel.linear.x = 0.0; vel.linear.y = 0.0; vel.linear.z = 0.0;
+	}
+
+   vel_pub_.publish(vel);
 }
-
 
 int main(int argc, char** argv)
 {
