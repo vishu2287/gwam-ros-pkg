@@ -49,7 +49,8 @@
   <joint name="base_footprint_joint" type="fixed">
      <!--NB: While you would think this would make it go up, it is oddly reversed.
       This moves the joint to 0,0,0 where we want it for rviz, etc. -->
-     <origin xyz="0 0 0.130" rpy="0 0 0" />
+     <!-- origin xyz="0 0 0.130" rpy="0 0 0" / -->
+     <origin xyz="0 0 0.18" rpy="0 0 0" />
      <parent link="base_footprint"/>
      <child link="base_link" />
   </joint>
@@ -58,9 +59,9 @@
   <!-- BASE_LINK (RED) -->
   <link name="base_link">
     <inertial>
-      <mass value="70.0" />
+      <mass value="85.0" />
       <origin xyz="0 0 0" />
-      <inertia  ixx="1.391" ixy="0.004"  ixz="0.0"  iyy="6.853"  iyz="0.0"  izz="6.125" />
+      <inertia  ixx="10.391" ixy="0.004"  ixz="0.0"  iyy="60.853"  iyz="0.0"  izz="60.125" />
     </inertial>
     <visual>
        <origin xyz="0 0 0" rpy="0 0 0" />
@@ -179,7 +180,7 @@
     </collision>
   </link>
   <gazebo reference="back_left_wheel">
-    <mu1 value="50.0"/>
+    <mu1 value="10.0"/>
     <mu2 value="0.5"/> 
     <fdir1 value="1 0 0"/>
     <material>Gazebo/Grey</material>
@@ -227,7 +228,7 @@
     </collision>
   </link>
   <gazebo reference="back_right_wheel">
-    <mu1 value="50.0"/> <!-- 2.0 -->
+    <mu1 value="10.0"/> <!-- 2.0 -->
     <mu2 value="0.5"/> <!-- 0.5 -->
     <fdir1 value="1 0 0"/>
     <material>Gazebo/Grey</material>
@@ -274,7 +275,7 @@
     </collision>
   </link>
   <gazebo reference="front_left_wheel">
-    <mu1 value="50.0"/> <!-- 2.0 -->
+    <mu1 value="10.0"/> <!-- 2.0 -->
     <mu2 value="0.5"/> <!-- 0.5 -->
     <fdir1 value="1 0 0"/>
     <material>Gazebo/Grey</material>
@@ -322,7 +323,7 @@
     </collision>
   </link>
   <gazebo reference="front_right_wheel">
-    <mu1 value="50.0"/> <!-- 2.0 -->
+    <mu1 value="10.0"/> <!-- 2.0 -->
     <mu2 value="0.5"/> <!-- 0.5 -->
     <fdir1 value="1 0 0"/>
     <material>Gazebo/Grey</material>
@@ -904,7 +905,7 @@
   <joint name="wam_basejoint" type="fixed">
     <parent link="base_link"/>
     <child link="wam_base" />
-    <origin xyz="0.0 -0.14 0.24" rpy="0 0 0" />
+    <origin xyz="-0.060 -0.140 0.206" rpy="0 0 0" />
   </joint>
     
   <joint name="wam_j1_joint" type="revolute">
