@@ -1,0 +1,16 @@
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/ROSBUILD_genmsg_cpp.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/ROSBUILD_genmsg_lisp.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/ROSBUILD_gensrv_cpp.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/ROSBUILD_gensrv_lisp.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/clean-test-results.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/gwam_joystick.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/rosbuild_precompile.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/rosbuild_premsgsrvgen.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/rospack_genmsg.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/rospack_genmsg_libexe.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/rospack_gensrv.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/test.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/test-future.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/test-results.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/test-results-run.dir
+/opt/ros/electric/stacks/gwam-ros-pkg/gwam/gwam_robot/gwam_joystick/CMakeFiles/tests.dir
