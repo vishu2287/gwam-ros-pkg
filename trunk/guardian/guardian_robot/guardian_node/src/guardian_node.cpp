@@ -120,7 +120,7 @@ void ChangeRefFrame(double *vx, double *vy, double *va, double *px, double *py, 
 int main(int argc, char** argv)
 {
 
-        ros::init(argc, argv, "guardian_node");
+	ros::init(argc, argv, "guardian_node");
 	ros::NodeHandle n;
 
 	ROS_INFO("Guardian for ROS.");
@@ -128,6 +128,7 @@ int main(int argc, char** argv)
 	std::string sDevicePort;
 	std::string sDefaultPort(GUARDIAN_HW_IFACE_DEFAULT_PORT);
 	n.param("motor_dev", sDevicePort,  sDefaultPort);
+	printf("guardian_node::main: Motor dev = %s\n", sDevicePort.c_str());
 
 	// Interface creation (Closed Loop Mixed Velocity Control)
 	guardian = new guardian_hw_iface::guardian_hardware_interface(50.0, sDevicePort.c_str());									
