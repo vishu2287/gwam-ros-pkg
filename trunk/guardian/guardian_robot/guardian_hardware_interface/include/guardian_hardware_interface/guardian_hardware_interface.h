@@ -39,7 +39,7 @@
 #include <geometry_msgs/Vector3.h>
 //#include <serial_port/lightweightserial.h>
 //#include <cereal_port/CerealPort.h>
-#include "/home/guardian-wam/Sources/Guardian/svn_guardian/trunk/robot/SerialDevice/include/SerialDevice/SerialDevice.h"
+#include "SerialDevice.h"
 
 
 namespace guardian_hw_iface{
@@ -48,16 +48,16 @@ namespace guardian_hw_iface{
 #define GUARDIAN_HARDWARE_INTERFACE_H
 
 // conection stuff
-#define GUARDIAN_HW_IFACE_DEFAULT_PORT 		        "/dev/ttyS0" //"/dev/ttyUSB0"
+#define GUARDIAN_HW_IFACE_DEFAULT_PORT			"/dev/ttyS0" //"/dev/ttyUSB0"
 #define GUARDIAN_HW_IFACE_DEFAULT_PARITY 		"even"
-#define GUARDIAN_HW_IFACE_DEFAULT_BAUDRATE 	        9600
-#define GUARDIAN_HW_IFACE_DEFAULT_DATA_SIZE 	        7
+#define GUARDIAN_HW_IFACE_DEFAULT_BAUDRATE		9600
+#define GUARDIAN_HW_IFACE_DEFAULT_DATA_SIZE		7
 
 // component frequency
-#define GUARDIAN_HW_IFACE_DEFAULT_HZ                   	10		
+#define GUARDIAN_HW_IFACE_DEFAULT_HZ            20		
 
 // Default max speeds
-#define GUARDIAN_HW_IFACE_MOTOR_DEF_MAX_SPEED 	        0x7F            // hexa
+#define GUARDIAN_HW_IFACE_MOTOR_DEF_MAX_SPEED 	    0x7F            // hexa
 #define GUARDIAN_HW_IFACE_MOTOR_DEF_MAX_REF_SPEED	0x7F            //
 
 // CONTROL MODE
@@ -84,10 +84,33 @@ namespace guardian_hw_iface{
 #define GUARDIAN_MAX_XSPEED         			1.00     	// [m/s]  - max speed of each track = (1800rpm/25/60)*pi*0.25=0.95<1.00
 #define GUARDIAN_MAX_YAWSPEED       			1.65     	// [rad/s] w = (vr-vl)/GUARDIAN_D_TRACKS_M =(0.95+0.95)/ 1.15
 
-#define GUARDIAN_HW_IFACE_SERIAL_DELAY		        5000		// us between serial transmisions to the GUARDIAN_HW_IFACE controller
+#define GUARDIAN_HW_IFACE_SERIAL_DELAY		    5000		// us between serial transmisions to the GUARDIAN_HW_IFACE controller
 #define GUARDIAN_HW_IFACE_ABSOLUTE_ENCODERS		1	        // from GUARDIAN_HW_IFACE.h
 #define GUARDIAN_HW_IFACE_RELATIVE_ENCODERS		2	       	// -//-
-#define GUARDIAN_HW_IFACE_MAX_ENC_INC                   1500            // maximal increment that could be read in 1 period = maximal speed
+#define GUARDIAN_HW_IFACE_MAX_ENC_INC           1500       // maximum increment that could be read in 1 period = maximal speed
+
+#define GUARDIAN_HW_IFACE_ENCODER_CONF          1               // Depending on the position of both encoder (values = 1 or 2)
+#define GUARDIAN_HW_IFACE_ENCODER_DIR           1              // Inverts or no the read value from the encoders (vales = -1 or 1)
+
+	
+/////////////////////// NEW ////////////////////////////////////
+	
+//! Different types of control mode
+enum MotorControlMode{
+    MCM_MIXED_OPEN = 0,
+    MCM_MIXED_CLOSED = 1,
+    MCM_SEPARATED_OPEN = 2,
+    MCM_SEPARATED_CLOSED = 3
+};
+
+//! Input control modes of the AX3500
+enum InputControlMode{
+    ICM_RC_MODE = 10,        // Radio control
+    ICM_RS232 = 11,          // Serial without watchdog
+    ICM_RS232_WATCHDOG = 12, // Serial with watch dog
+    ICM_ANALOG = 13          // Analog
+};
+////////////////////////////////////////////////////////////////////////
 
 typedef struct _pose {
         double vx;
@@ -112,12 +135,12 @@ typedef struct _data {
         bool digital_output;        	// 1 digital output (real value)
         bool digital_output_setvalue; 	// digital output (set value)
         bool digital_input[2];     	// 2 digital inputs
-	int encoder_left;           	// left encoder pulses
-	int encoder_right;          	// right encoder pulses
-	int last_encoder_left;      	// left encoder pulses
-	int last_encoder_right;     	// right encoder pulses
-	double v_ref_mps;	    	// current reference linear speed [mps]
-	double w_ref_rads; 	    	// current reference angular speed [rads]
+		int encoder_left;           	// left encoder pulses
+		int encoder_right;          	// right encoder pulses
+		int last_encoder_left;      	// left encoder pulses
+		int last_encoder_right;     	// right encoder pulses
+		double v_ref_mps;	    	// current reference linear speed [mps]
+		double w_ref_rads; 	    	// current reference angular speed [rads]
         double actSpeedLmps;        	// current speed left
         double actSpeedRmps;        	// current speed right
         double desSpeedLmps;        	// reference speed left
@@ -125,8 +148,8 @@ typedef struct _data {
         double max_linear_speed;   	// maximal linear speed
         double max_angular_speed;  	// maximal angular speed
         bool bMotorsEnabled;       	// motors enabled or not
-	int controlMode;		// current control mode
-	States currentState;		// curent State (0: init, 1: ready, 2: failure)
+		int controlMode;		// current control mode
+		States currentState;		// curent State (0: init, 1: ready, 2: failure)
 } data;
 
 //! Class to operate the guardian_hardware_interface servo driver
@@ -138,22 +161,25 @@ class guardian_hardware_interface{
         pthread_mutex_t mutex_encoders;
         //! Mutex for controlling the changes and access to encoder values
         pthread_mutex_t mutex_odometry;
-	//! Class for the serial communication
-	//SerialDevice *serial;
-	SerialDevice::SerialDevice * serial;
+		//! Class for the serial communication
+		//SerialDevice *serial;
+		SerialDevice::SerialDevice * serial;
         //! Establish encoder's data process (Absolute or Relative)
         int encoders_mode;
-	//! Control mode of the robot (RS232, R/C)
-	int control_mode;
-	//! Odometry data
-	pose robot_pose;
-	//! Robot data
-	data robot_data;
-	//! Error counter (just for debug)
-	int err_counter;
-	//! Internal error code used to select the apropiate recovery action
-	int iErrorType;
-
+		//! Control mode of the robot (RS232, R/C)
+		int control_mode;
+		//! Odometry data
+		pose robot_pose;
+		//! Robot data
+		data robot_data;
+		//! Error counter (just for debug)
+		int err_counter;
+		//! Internal error code used to select the apropiate recovery action
+		int iErrorType;
+		//! Saves the string to read each encoder
+		char cmdEncLeft[8], cmdEncRight[8];
+		//! Current motor control mode
+        int motor_control_mode;
     public:
 
         //! Public constructor
@@ -188,8 +214,8 @@ class guardian_hardware_interface{
         bool GetDigitalInput(int input);
         //! Actions for the default mode ReadyState
         void ReadyState(int token);
-	//! Get current State
-	States GetCurrentState();
+		//! Get current State
+		States GetCurrentState();
 
     private:
 
@@ -207,7 +233,8 @@ class guardian_hardware_interface{
         //!	Read the control mode
         void ReadControlMode();
         //!	Write the control mode (mixed/separated axes, open/closed loop)
-        void WriteControlMode(int cm);
+        //void WriteControlMode(int cm);
+		void WriteMotorControlMode(MotorControlMode mcm);
         //! brief Read analog inputs
         void ReadAnalogInputs();
         //! Read digital inputs

@@ -33,5 +33,5 @@ include_directories(/home/guardian-wam/Sources/Guardian/svn_guardian/trunk/robot
 #target_link_libraries(Component /home/robotnik/Escritorio/guardian_real/Component/build)
 rosbuild_add_library(guardian_hardware_interface src/guardian_hardware_interface.cpp)
 
-rosbuild_add_library(SerialDevice /home/guardian-wam/Sources/Guardian/svn_guardian/trunk/robot/SerialDevice/src/SerialDevice.cc)
+rosbuild_add_library(SerialDevice src/SerialDevice.cc)
 target_link_libraries(guardian_hardware_interface SerialDevice)
