@@ -311,9 +311,9 @@ bool WamNode::wam_go_home(std_srvs::Empty::Request &req, std_srvs::Empty::Respon
     for (int i = 0; i < 4; i++)
       (*jp4c)[i] = 0.0;
     wam4->moveTo(*jp4c, true);
-    *jp4home[3] += 0.3;
+    jp4home[3] += 0.3;
     wam4->moveTo(*jp4home, true);
-    *jp4home[3] -= 0.3;
+    jp4home[3] -= 0.3;
     wam4->moveTo(*jp4home, true);
   }
   else if (wam_dof == 7)
