@@ -15,5 +15,7 @@ gripper_close_button: 14
 spread_open_button: 13
 spread_close_button: 15
 rotation_control_button: 8
+go_home_button: 0
+hold_position_button: 3
 grasp_max_velocity: 1.0
 spread_max_velocity: 1.0
