@@ -1,0 +1,19 @@
+# WAM Axes
+cartesian_x_axis: 3
+cartesian_y_axis: 2
+cartesian_z_axis: 1
+
+#WAM Max Movement
+wam_max_dx: 0.01
+wam_max_dy: 0.01
+wam_max_dz: 0.01
+
+# WAM Button Mapping
+deadman_button: 10
+gripper_open_button: 12
+gripper_close_button: 14
+spread_open_button: 13
+spread_close_button: 15
+rotation_control_button: 8
+grasp_max_velocity: 1.0
+spread_max_velocity: 1.0
