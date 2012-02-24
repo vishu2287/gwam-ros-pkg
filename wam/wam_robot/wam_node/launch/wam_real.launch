@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+	<node type="wam_node" name="wam_node" pkg="wam_node">
+	</node>
+
+</launch>
