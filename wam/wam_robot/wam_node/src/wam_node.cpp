@@ -27,7 +27,6 @@
 static const int PUBLISH_FREQ = 60;
 
 using namespace barrett;
-//using systems::connect;
 
 bool newpos = false;
 bool rt_status = false;
@@ -41,9 +40,11 @@ systems::Wam<7>* wam7 = NULL;
 Hand* hand = NULL;
 units::JointPositions<4>::type* jp4;
 units::JointPositions<4>::type* jp4c;
+units::JointPositions<4>::type* jp4home;
 units::JointPositions<4>::type* jphnd;
 units::JointPositions<7>::type* jp7;
 units::JointPositions<7>::type* jp7c;
+units::JointPositions<7>::type* jp7home;
 units::JointTorques<4>::type* jt4;
 units::JointTorques<7>::type* jt7;
 units::JointVelocities<4>::type* jv4;
@@ -86,6 +87,7 @@ protected:
   ros::Subscriber rt_cart_sub;
   ros::ServiceServer gravity_srv;
   ros::ServiceServer jmove_srv;
+  ros::ServiceServer wam_go_home_srv;
   ros::ServiceServer bhand_sp_pos_srv;
   ros::ServiceServer bhand_gsp_pos_srv;
   ros::ServiceServer bhand_sp_vel_srv;
@@ -126,6 +128,7 @@ public:
   void rt_cart_cb(const wam_msgs::RTCart::ConstPtr& rtmove);
   bool hold_pose(wam_msgs::HoldPose::Request &req, wam_msgs::HoldPose::Response &res);
   bool hold_joint_position(wam_msgs::HoldJointPosition::Request &req, wam_msgs::HoldJointPosition::Response &res);
+  bool wam_go_home(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res);
   bool bhand_spread_pos(wam_msgs::BHandSpreadPos::Request &req, wam_msgs::BHandSpreadPos::Response &res);
   bool bhand_grasp_pos(wam_msgs::BHandGraspPos::Request &req, wam_msgs::BHandGraspPos::Response &res);
   bool bhand_spread_vel(wam_msgs::BHandSpreadVel::Request &req, wam_msgs::BHandSpreadVel::Response &res);
@@ -149,8 +152,10 @@ template<size_t DOF>
       wam_dof = 4;
       jp4 = new units::JointPositions<4>::type;
       jp4c = new units::JointPositions<4>::type;
+      jp4home = new units::JointPositions<4>::type;
       jt4 = new units::JointTorques<4>::type;
       jv4 = new units::JointVelocities<4>::type;
+      *jp4home = wam4->getJointPositions();
     }
     else if (pm.foundWam7())
     {
@@ -158,8 +163,10 @@ template<size_t DOF>
       wam_dof = 7;
       jp7 = new units::JointPositions<7>::type;
       jp7c = new units::JointPositions<7>::type;
+      jp7home = new units::JointPositions<7>::type;
       jt7 = new units::JointTorques<7>::type;
       jv7 = new units::JointVelocities<7>::type;
+      *jp7home = wam7->getJointPositions();
     }
     cpc = new units::CartesianPosition::type;
     cprtc = new units::CartesianPosition::type;
@@ -180,6 +187,7 @@ template<size_t DOF>
     cmove_srv = n_.advertiseService("cartesian_pos", &WamNode::cart_move, this);
     hold_pose_srv = n_.advertiseService("orientation_hold", &WamNode::hold_pose, this);
     hold_j_position_srv = n_.advertiseService("joint_pos_hold", &WamNode::hold_joint_position, this);
+    wam_go_home_srv = n_.advertiseService("go_home", &WamNode::wam_go_home, this);
     wam_joint_pub = n_.advertise<sensor_msgs::JointState>("joints", 100);
     pose_pub = n_.advertise<geometry_msgs::PoseStamped>("pose", 100);
     rt_cart_sub = n_.subscribe("rtposition", 1, &WamNode::rt_cart_cb, this);
@@ -267,7 +275,8 @@ bool WamNode::hold_joint_position(wam_msgs::HoldJointPosition::Request &req, wam
   holding_j_pos = req.hold;
   if (holding_j_pos)
   {
-    if (wam_dof == 4){
+    if (wam_dof == 4)
+    {
       wam4->moveTo(wam4->getJointPositions());
     }
     else if (wam_dof == 7)
@@ -286,6 +295,40 @@ bool WamNode::hold_joint_position(wam_msgs::HoldJointPosition::Request &req, wam
       wam7->idle();
     }
   }ROS_INFO("Joint Position Hold request: %s", (req.hold) ? "true" : "false");
+  return true;
+}
+
+bool WamNode::wam_go_home(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res)
+{
+  ROS_INFO("Returning to Home Position");
+  if (got_hand)
+  {
+    hand->graspMove(Hand::jp_type(2.4), true);
+    hand->spreadMove(Hand::jp_type(3.4), true);
+  }
+  if (wam_dof == 4)
+  {
+    for (int i = 0; i < 4; i++)
+      (*jp4c)[i] = 0.0;
+    wam4->moveTo(*jp4c, true);
+    *jp4home[3] += 0.3;
+    wam4->moveTo(*jp4home, true);
+    *jp4home[3] -= 0.3;
+    wam4->moveTo(*jp4home, true);
+  }
+  else if (wam_dof == 7)
+  {
+    for (int j = 0; j < 7; j++)
+    {
+      (*jp7c)[j] = 0.0;
+    }
+    wam7->moveTo(*jp7c, true);
+    wam7->moveTo(*jp7c, true);
+    *jp7home[3] += 0.3;
+    wam7->moveTo(*jp7home, true);
+    *jp7home[3] -= 0.3;
+    wam4->moveTo(*jp7home, true);
+  }
   return true;
 }
 
