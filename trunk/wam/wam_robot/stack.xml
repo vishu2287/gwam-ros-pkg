@@ -1,0 +1,9 @@
+<stack>
+  <description brief="wam_robot">wam_robot</description>
+  <author>Maintained by Kyle Maroney</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/wam_robot</url>
+  <depend stack="ros" />
+
+</stack>
