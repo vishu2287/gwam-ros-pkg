@@ -6,6 +6,7 @@
 #include "wam_msgs/JointMove.h"
 #include "wam_msgs/CartMove.h"
 #include "wam_msgs/HoldPose.h"
+#include "wam_msgs/HoldJointPosition.h"
 #include "wam_msgs/BHandGraspPos.h"
 #include "wam_msgs/BHandSpreadPos.h"
 #include "wam_msgs/BHandGraspVel.h"
@@ -23,16 +24,16 @@
 #include <barrett/systems/wam.h>
 #include <barrett/detail/stl_utils.h>
 
-static const int PUBLISH_FREQ = 25;
+static const int PUBLISH_FREQ = 60;
 
 using namespace barrett;
 //using systems::connect;
 
-
 bool newpos = false;
 bool rt_status = false;
 bool grav_state = true;
-bool holding = false;
+bool holding_pose = false;
+bool holding_j_pos = false;
 bool got_hand = false;
 int wam_dof = 0;
 systems::Wam<4>* wam4 = NULL;
@@ -73,40 +74,6 @@ template<>
     return pm.getWam4();
   }
 
-//For real-time cartesian controller
-template<typename T1, typename T2, typename OutputType>
-  class Multiplier : public systems::System, public systems::SingleOutput<OutputType>
-  {
-  public:
-    Input<T1> input1;
-  public:
-    Input<T2> input2;
-
-  public:
-    Multiplier(std::string sysName = "Multiplier") :
-        systems::System(sysName), systems::SingleOutput<OutputType>(this), input1(this), input2(this)
-    {
-    }
-    virtual ~Multiplier()
-    {
-      mandatoryCleanUp();
-    }
-
-  protected:
-    OutputType data;
-    virtual void operate()
-    {
-      data = input1.getValue() * input2.getValue();
-      this->outputValue->setData(&data);
-    }
-
-  private:
-    DISALLOW_COPY_AND_ASSIGN(Multiplier);
-
-  public:
-EIGEN_MAKE_ALIGNED_OPERATOR_NEW    ; // In case we use vectorizable Eigen types.
-  };
-
 class WamNode
 {
 protected:
@@ -125,6 +92,7 @@ protected:
   ros::ServiceServer bhand_gsp_vel_srv;
   ros::ServiceServer cmove_srv;
   ros::ServiceServer hold_pose_srv;
+  ros::ServiceServer hold_j_position_srv;
 
   ros::Time last_recieved_rt_pos_msg_time;
   ros::Duration rt_pos_msg_timeout;
@@ -157,6 +125,7 @@ public:
   bool cart_move(wam_msgs::CartMove::Request &req, wam_msgs::CartMove::Response &res);
   void rt_cart_cb(const wam_msgs::RTCart::ConstPtr& rtmove);
   bool hold_pose(wam_msgs::HoldPose::Request &req, wam_msgs::HoldPose::Response &res);
+  bool hold_joint_position(wam_msgs::HoldJointPosition::Request &req, wam_msgs::HoldJointPosition::Response &res);
   bool bhand_spread_pos(wam_msgs::BHandSpreadPos::Request &req, wam_msgs::BHandSpreadPos::Response &res);
   bool bhand_grasp_pos(wam_msgs::BHandGraspPos::Request &req, wam_msgs::BHandGraspPos::Response &res);
   bool bhand_spread_vel(wam_msgs::BHandSpreadVel::Request &req, wam_msgs::BHandSpreadVel::Response &res);
@@ -210,6 +179,7 @@ template<size_t DOF>
     jmove_srv = n_.advertiseService("joint_pos", &WamNode::joint_move, this);
     cmove_srv = n_.advertiseService("cartesian_pos", &WamNode::cart_move, this);
     hold_pose_srv = n_.advertiseService("orientation_hold", &WamNode::hold_pose, this);
+    hold_j_position_srv = n_.advertiseService("joint_pos_hold", &WamNode::hold_joint_position, this);
     wam_joint_pub = n_.advertise<sensor_msgs::JointState>("joints", 100);
     pose_pub = n_.advertise<geometry_msgs::PoseStamped>("pose", 100);
     rt_cart_sub = n_.subscribe("rtposition", 1, &WamNode::rt_cart_cb, this);
@@ -222,7 +192,7 @@ template<size_t DOF>
     wam_joint_state.velocity.resize(wam_dof);
     wam_joint_state.effort.resize(wam_dof);
 
-    if (got_hand)//If BarrettHand Found on Bus, Initialize hand and begin advertising joint messages and control services
+    if (got_hand) //If BarrettHand Found on Bus, Initialize hand and begin advertising joint messages and control services
     {
       hand->initialize();
       hand->updatePosition(true);
@@ -252,7 +222,6 @@ template<size_t DOF>
 
 void WamNode::rt_cart_cb(const wam_msgs::RTCart::ConstPtr& msg)
 {
-  std::cerr << "made it to the rt callback" << std::endl;
   if (rt_status)
   {
     rt_pos_cmd[0] = msg->position[0];
@@ -265,8 +234,8 @@ void WamNode::rt_cart_cb(const wam_msgs::RTCart::ConstPtr& msg)
 
 bool WamNode::hold_pose(wam_msgs::HoldPose::Request &req, wam_msgs::HoldPose::Response &res)
 {
-  holding = req.hold;
-  if (holding)
+  holding_pose = req.hold;
+  if (holding_pose)
   {
     if (wam_dof == 4)
     {
@@ -290,6 +259,33 @@ bool WamNode::hold_pose(wam_msgs::HoldPose::Request &req, wam_msgs::HoldPose::Re
       wam7->idle();
     }
   }ROS_INFO("Pose Hold request: %s", (req.hold) ? "true" : "false");
+  return true;
+}
+
+bool hold_joint_position(wam_msgs::HoldJointPosition::Request &req, wam_msgs::HoldJointPosition::Response &res)
+{
+  holding_j_pos = req.hold;
+  if (holding_j_pos)
+  {
+    if (wam_dof == 4){
+      wam4->moveTo(wam4->getJointPositions());
+    }
+    else if (wam_dof == 7)
+    {
+      wam7->moveTo(wam7->getJointPositions());
+    }
+  }
+  else
+  {
+    if (wam_dof == 4)
+    {
+      wam4->idle();
+    }
+    else if (wam_dof == 7)
+    {
+      wam7->idle();
+    }
+  }ROS_INFO("Joint Position Hold request: %s", (req.hold) ? "true" : "false");
   return true;
 }
 
