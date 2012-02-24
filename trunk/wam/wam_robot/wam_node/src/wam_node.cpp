@@ -262,7 +262,7 @@ bool WamNode::hold_pose(wam_msgs::HoldPose::Request &req, wam_msgs::HoldPose::Re
   return true;
 }
 
-bool hold_joint_position(wam_msgs::HoldJointPosition::Request &req, wam_msgs::HoldJointPosition::Response &res)
+bool WamNode::hold_joint_position(wam_msgs::HoldJointPosition::Request &req, wam_msgs::HoldJointPosition::Response &res)
 {
   holding_j_pos = req.hold;
   if (holding_j_pos)
