@@ -303,7 +303,7 @@ bool WamNode::wam_go_home(std_srvs::Empty::Request &req, std_srvs::Empty::Respon
   ROS_INFO("Returning to Home Position");
   if (got_hand)
   {
-    hand->graspMove(Hand::jp_type(2.4), true);
+    hand->graspMove(Hand::jp_type(0.0), true);
     hand->spreadMove(Hand::jp_type(3.4), true);
   }
   if (wam_dof == 4)
@@ -311,9 +311,9 @@ bool WamNode::wam_go_home(std_srvs::Empty::Request &req, std_srvs::Empty::Respon
     for (int i = 0; i < 4; i++)
       (*jp4c)[i] = 0.0;
     wam4->moveTo(*jp4c, true);
-    jp4home[3] += 0.3;
+    (*jp4home)[3] += 0.3;
     wam4->moveTo(*jp4home, true);
-    jp4home[3] -= 0.3;
+    (*jp4home)[3] -= 0.3;
     wam4->moveTo(*jp4home, true);
   }
   else if (wam_dof == 7)
@@ -324,10 +324,10 @@ bool WamNode::wam_go_home(std_srvs::Empty::Request &req, std_srvs::Empty::Respon
     }
     wam7->moveTo(*jp7c, true);
     wam7->moveTo(*jp7c, true);
-    *jp7home[3] += 0.3;
+    (*jp7home)[3] += 0.3;
     wam7->moveTo(*jp7home, true);
-    *jp7home[3] -= 0.3;
-    wam4->moveTo(*jp7home, true);
+    (*jp7home)[3] -= 0.3;
+    wam7->moveTo(*jp7home, true);
   }
   return true;
 }
