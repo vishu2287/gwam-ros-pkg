@@ -1,9 +1,0 @@
-\subsubsection usage Usage
-\verbatim
-<node name="camera_aravis_params" pkg="camera_aravis" type="camera_aravis_params">
-  <param name="exposure" type="double" value="100000.0" />
-  <param name="gain" type="int" value="350" />
-  <param name="frame_id" type="str" value="camera" />
-</node>
-\endverbatim
-
