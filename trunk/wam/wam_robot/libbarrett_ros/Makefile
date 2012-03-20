@@ -2,7 +2,7 @@ all: installed
 
 SVN_DIR = libbarrett
 SVN_URL = http://web.barrett.com/svn/libbarrett/trunk/
-#SVN_REVISION = -r 808
+SVN_REVISION = -r 856
 #SVN_PATCH = 
 include $(shell rospack find mk)/svn_checkout.mk
 SOURCE_DIR = $(SVN_DIR) 
