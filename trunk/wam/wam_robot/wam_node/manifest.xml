@@ -16,6 +16,7 @@
   <depend package="actionlib"/>
   <depend package="libbarrett_ros"/>
   <depend package="wam_msgs"/>
+  <depend package="tf"/>
 </package>
 
 

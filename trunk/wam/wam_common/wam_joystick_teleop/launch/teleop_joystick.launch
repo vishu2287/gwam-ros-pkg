@@ -1,0 +1,15 @@
+<launch>
+	
+  <node pkg="joy" name="joy_node" type="joy_node" respawn="true">
+      <rosparam>
+        autorepeat_rate: 0.0
+        deadzone: 0.12
+        dev: "/dev/input/js0"
+      </rosparam>
+  </node>
+    
+  <node pkg="wam_joystick_teleop" type="teleop_joystick" name="teleop_joystick" output="screen">
+    <rosparam file="$(find wam_joystick_teleop)/config/teleop.yaml" command="load" />
+  </node>
+
+</launch>
