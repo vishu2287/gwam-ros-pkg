@@ -1,0 +1,14 @@
+<package>
+  <description brief="wam_description">
+
+     wam_description
+
+  </description>
+  <author>Kyle Maroney</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/wam_description</url>
+
+</package>
+
+
