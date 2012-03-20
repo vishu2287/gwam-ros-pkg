@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro"
+       name="wam">
+  
+  <!-- LINKS   -->  
+  <include filename="$(find wam_description)/xacro/wam_base.urdf.xacro" />
+  <include filename="$(find wam_description)/xacro/wam_j1.urdf.xacro" />
+  <include filename="$(find wam_description)/xacro/wam_j2.urdf.xacro" />
+  <include filename="$(find wam_description)/xacro/wam_j3.urdf.xacro" />
+  <include filename="$(find wam_description)/xacro/wam_j4.urdf.xacro" />
+  <include filename="$(find wam_description)/xacro/wam_tool_plate.urdf.xacro" />
+
+  <xacro:wam_base>
+  </xacro:wam_base>
+  <xacro:wam_j1 parent="wam_base">
+  </xacro:wam_j1>
+  <xacro:wam_j2 parent="wam_j1">
+  </xacro:wam_j2>
+  <xacro:wam_j3 parent="wam_j2">
+  </xacro:wam_j3>
+  <xacro:wam_j4 parent="wam_j3">
+  </xacro:wam_j4>
+  <xacro:wam_tool_plate parent="wam_j4">
+  </xacro:wam_tool_plate>
+
+</robot>
+
