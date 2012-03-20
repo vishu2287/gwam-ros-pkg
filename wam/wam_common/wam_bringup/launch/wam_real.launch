@@ -1,0 +1,41 @@
+<launch>
+
+  <!-- THIS IS A LAUNCH FILE FOR LAUNCHING THE WAM / BHAND ***ON THE WAM*** -->
+  <!-- default arguments -->
+  <arg name="wam_7dof" default="false"/>
+  <arg name="bhand_present" default="false"/>
+  <arg name="urdf_name" default="wam_4dof"/>
+
+  <!--Loading the correct robot description based on the passed arguments -->
+  <group if="$(arg wam_7dof)">
+    <group if="$(arg bhand_present)">
+      <param name="robot_description" textfile="$(find wam_description)/urdf/wam_7dof_hand.urdf" />
+    </group>
+    <group unless="$(arg bhand_present)">
+      <param name="robot_description" textfile="$(find wam_description)/urdf/wam_7dof.urdf" />
+    </group>
+  </group>
+
+  <group unless="$(arg wam_7dof)">
+    <group if="$(arg bhand_present)">
+      <param name="robot_description" textfile="$(find wam_description)/urdf/wam_4dof.urdf" />
+    </group>
+    <group unless="$(arg bhand_present)">
+      <param name="robot_description" textfile="$(find wam_description)/urdf/wam_4dof.urdf" />
+    </group>
+  </group>
+
+<!--Now that the parameter server is set up correctly,
+    We will launch the common launch files-->
+
+<!--Launching the robot_state_publisher at 50 Hz-->>
+<node pkg="robot_state_publisher" type="state_publisher" name="wam_st_pub" >
+  <remap from="joint_states" to="wam/joint_states" />
+</node>
+
+
+<!--Launching the WAM Node-->
+<include file="$(find wam_node)/launch/wam_node.launch"/>
+
+
+</launch>

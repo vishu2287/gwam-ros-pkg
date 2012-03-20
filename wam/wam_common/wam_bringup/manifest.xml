@@ -1,0 +1,14 @@
+<package>
+  <description brief="wam_bringup">
+
+     wam_bringup
+
+  </description>
+  <author></author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/wam_bringup</url>
+
+</package>
+
+
