@@ -5,3 +5,28 @@
 ----
 *The gwam-ros-pkg is a ROS repository for control of the Guardian-WAM robot in both simulation and the real world.*
 ----
+
+For Installation of gwam-ros-pkg please refer to the [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMROSInstallation gwam-ros-pkg Installation Instructions]
+
+== Capability Overview == 
+
+=== Basic Configuration === 
+|| *Component*      || *ROS package/stack* ||
+||Robot-specific Messages and Services|| [gwam_msgs] ||
+||Robot model (URDF)     || [gwam_description] ||
+
+=== Hardware Drivers and Simulation ===
+|| *Component*      || *ROS package/stack* ||
+|| WAM / BHand Node|| [wam_node] ||
+|| Guardian Node || [guardian_node] ||
+|| GWAM Simulation || [gwam_bringup] ||
+
+=== High-Level Capabilities ===
+|| *Component*      || *ROS package/stack* ||
+|| Teleop|| [gwam_joystick_teleop] ||
+|| Navigation || [guardian_navigation] ||
+|| Arm Navigation || [TBD] ||
+
+
+
+Now that you understand the layout of the software, please continue to the [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsMainPage GWAM Tutorials]
