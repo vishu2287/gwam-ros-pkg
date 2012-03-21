@@ -2,4 +2,6 @@
 
 = gwam-ros-pkg Software Overview =
 
-This page describes the software architecture for the gwam-ros-pkg
+----
+*The gwam-ros-pkg is a ROS repository for control of the Guardian-WAM robot in both simulation and the real world.*
+----
