@@ -4,13 +4,17 @@
 
 The Guardian-WAM is a dexterous mobile manipulation platform built by Barrett Technology in Partnership with Robotnik. (Roseanne Description??)
 
-If you are using the Guardian-WAM we suggest starting with the Guardain-WAM User Manual (LINK).
+If you are using the Guardian-WAM we suggest starting with the [http://support.barrett.com/wiki/GuardianWAM Guardian-WAM Resources Page].
 
 _ROS Software Maintainers: [http://www.barrett.com Barrett Technology] & [http://www.robotnik.es Robotnik]_
 
 
 = Installation =
+*[http://code.google.com/p/gwam-ros-pkg/wiki/InitialSetupInstructionsOffboardPC  Initial Setup - User PC]*
 
+*[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMROSInstallation gwam-ros-pkg Installation]*
+
+= Software Overview = 
 
 = Running = 
 ==  Simulation == 
@@ -23,9 +27,6 @@ Link to Tutorials Page
 
 = Support =
 Link to support Page (support.barrett.com?)
-
-= Library Overview = 
-Graphviz Visual here?
 
 = Related / Continued Resources =
 Link to relevant individual documentation.
