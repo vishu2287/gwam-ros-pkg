@@ -16,6 +16,9 @@ _ROS Software Maintainers: [http://www.barrett.com Barrett Technology] & [http:/
 
 = Software Overview = 
 
+*[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMROSSoftwareOverview gwam-ros-pkg Software Overview]*
+
+
 = Running = 
 ==  Simulation == 
 Link to Wiki page
