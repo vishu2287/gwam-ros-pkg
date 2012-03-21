@@ -1,6 +1,4 @@
 #labels InitialSetup,ROSEnvironment,ROSNetwork
-#Instructions for initial setup for you personal computer to communicate with the Guardian-WAM.
-
 = Initial Setup - User PC =
 
 The Guardian-WAM software framework is ROS (Robot Operating System).  For more information on ROS please visit [http://www.ros.org ros.org].
