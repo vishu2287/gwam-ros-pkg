@@ -69,7 +69,10 @@ A handy command to view your ROS Environment variables at any time is:
 env | grep ROS
 }}}
 
+For further information on ROS Environment Variables please visit: http://www.ros.org/wiki/ROS/EnvironmentVariables
 
+For further information on ROS Networking please visit:
+http://www.ros.org/wiki/ROS/NetworkSetup
 
 === Secure Shell Guardian PC Communication === 
 
