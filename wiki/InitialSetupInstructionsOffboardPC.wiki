@@ -1,0 +1,74 @@
+#labels InitialSetup,ROSEnvironment,ROSNetwork
+#Instructions for initial setup for you personal computer to communicate with the Guardian-WAM.
+
+= Initial Setup - User PC =
+
+The Guardian-WAM software framework is ROS (Robot Operating System).  For more information on ROS please visit [http://www.ros.org ros.org].
+
+There are two primary communication techniques with the Guardian WAM:
+
+=== Local PC Communication === 
+*_The following is the preferred GWAM communication protocol._*
+
+*Install ROS Electric:*
+
+To use the Guardian-WAM in conjunction with a local pc, you must have installed a local copy of ROS Electric.  Installation instructions are available here: [http://www.ros.org/wiki/electric/Installation/Ubuntu ROS Electric Installation].
+
+*Configure ROS Network Setup:*  (_On your personal computer only!_)
+
+You need to edit your */etc/hosts* file and add the following lines
+{{{
+192.168.2.100   guardian-WAM
+192.168.2.110   WAM
+}}}
+
+*Edit your local .bashrc:*
+
+Add the following to your local *~/.bashrc* file with preferred text editor.  This will allow us to create a local environment description file for easy editing.
+{{{
+source ~/.gwambashrc.ros
+}}}
+
+Now that we have created the link to our local environment file, we must create it in our favorite text editor.
+
+Create the file ~/.gwambashrc.ros and paste in the following
+{{{
+source /opt/ros/electric/setup.bash
+alias gwam_sim='export ROBOT=sim; export ROS_MASTER_URI=http://localhost:11311;'
+alias gwam_real='source ~/gwam_real_environment.sh'
+
+#Uncomment and fill in according the point to your ros packages
+#export ROS_PACKAGE_PATH=~/path_to_your_ros_packages:${ROS_PACKAGE_PATH}
+
+#Give the environment a default configuration (either gwam_sim or gwam_real).
+gwam_sim
+}}}
+
+Now that we have created our local environment file, we must create the automatic script for loading your ip and rosmaster.  Download this shell script with the following commands:
+{{{
+cd ~/
+wget http://www.web.barrett.com/support/
+}}}
+
+In the last script we have exposed two commands to you.  You can now use the command line in any terminal and set up your environment variables very easily.  
+
+In a new terminal you should now be able to give either command:
+
+{{{
+gwam_sim
+## or ##
+gwam_real
+}}}
+
+These commands will automatically set up your environment to reflect if you would like to use the gwam robot or simulation accordingly.
+
+Please test the commands in a new terminal to verify completeness.
+
+A handy command to view your ROS Environment variables at any time is:
+{{{
+env | grep ROS
+}}}
+
+
+
+=== Secure Shell Guardian PC Communication === 
