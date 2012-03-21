@@ -32,7 +32,7 @@ Link to Wiki page
 Link to Wiki page
 
 = Tutorials = 
-Link to Tutorials Page
+*[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsMainPage Guardian-WAM Tutorials]*
 
 = Support =
 Link to support Page (support.barrett.com?)
