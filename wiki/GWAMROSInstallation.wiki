@@ -3,4 +3,16 @@
 
 = Installation Instructions for the gwam-ros-pkg Repository=
 
-This is the page for installation instructions gwam-ros-pkg
+To Install the gwam-ros-pkg Software for the Guardian-WAM System.  Navigate to a working ROS folder, (Typically ~/ros).  Verify that this folder is in your ROS_PACKAGE_PATH.  
+{{{
+env | grep ROS_PACKAGE_PATH
+}}}
+If it is, please continue on. If your current directory is not in your ROS_PACKAGE_PATH please follow the instructions [http://code.google.com/p/gwam-ros-pkg/wiki/InitialSetupInstructionsOffboardPC here] for setting up your environment correctly.  Also, for further information on your ROS_PACKAGE_PATH visit: [http://ros.org/wiki/ROS/EnvironmentVariables].
+
+*Install gwam-ros-pkg*
+
+{{{
+svn checkout http://gwam-ros-pkg.googlecode.com/svn/trunk/ gwam-ros-pkg
+}}}
+
+Now that you have successfully checked out the gwam-ros-pkg please continue to our [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMROSSoftwareOverview gwam-ros-pkg Software Overview]
