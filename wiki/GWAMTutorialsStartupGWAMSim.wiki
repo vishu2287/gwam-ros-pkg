@@ -1,0 +1,5 @@
+#summary A tutorial describing how to start the Guardian-WAM in Simulation.
+
+= Starting the Guardian-WAM Robot in Simulation=
+
+This tutorial describes how to start the Guardian-WAM system for the simulated robot in it's different configurations.
