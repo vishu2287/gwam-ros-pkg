@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <launch>
-	<node type="wam_node" name="wam_node" pkg="wam_node" output="screen" />
-
+  <include file="$(find gwam_bringup)/launch/machines.launch"/>
+  <node type="wam_node" name="wam_node" pkg="wam_node" output="screen" machine="wam" />
 </launch>

@@ -1,0 +1,6 @@
+<launch>
+  <include file="$(find gwam_bringup)/launch/machines.launch" />
+
+  <include file="$(find wam_bringup)/launch/wam_real.launch" />
+
+</launch>

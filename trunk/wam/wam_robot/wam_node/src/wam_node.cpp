@@ -545,8 +545,10 @@ template<size_t DOF>
       wam_joint_state.velocity[i] = jv[i];
       wam_joint_state.effort[i] = jt[i];
     }
+    wam_joint_state.header.stamp = ros::Time::now();
     wam_joint_pub.publish(wam_joint_state);
     //publishing geometry_msgs/PoseStamed to wam_pose
+    wam_pose.header.stamp = ros::Time::now();
     wam_pose.pose.position.x = cp[0];
     wam_pose.pose.position.y = cp[1];
     wam_pose.pose.position.z = cp[2];

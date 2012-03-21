@@ -1,0 +1,14 @@
+<package>
+  <description brief="gwam_bringup">
+
+     gwam_bringup
+
+  </description>
+  <author>robot</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/gwam_bringup</url>
+
+</package>
+
+

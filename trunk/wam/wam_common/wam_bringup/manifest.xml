@@ -8,7 +8,8 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/wam_bringup</url>
-
+  <depend package="wam_description"/>
+  <depend package="robot_state_publisher"/>
 </package>
 
 
