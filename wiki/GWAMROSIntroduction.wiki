@@ -1,6 +1,8 @@
 = Guardian-WAM =
 
-((GWAM IMAGE))
+<wiki:comment>
+This text will be removed from the rendered page.
+</wiki:comment>
 
 The Guardian-WAM is a dexterous mobile manipulation platform built by Barrett Technology in Partnership with Robotnik. (Roseanne Description??)
 
