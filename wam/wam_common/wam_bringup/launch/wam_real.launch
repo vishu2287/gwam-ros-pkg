@@ -4,7 +4,6 @@
   <!-- default arguments -->
   <arg name="wam_7dof" default="false"/>
   <arg name="bhand_present" default="false"/>
-  <arg name="urdf_name" default="wam_4dof"/>
 
   <!--Loading the correct robot description based on the passed arguments -->
   <group if="$(arg wam_7dof)">
@@ -18,10 +17,10 @@
 
   <group unless="$(arg wam_7dof)">
     <group if="$(arg bhand_present)">
-      <param name="robot_description" textfile="$(find wam_description)/urdf/wam_4dof.urdf" />
+      <param name="robot_description" command="$(find xacro)/xacro.py '$(find wam_description)/xacro/wam_4dof.urdf.xacro'" />
     </group>
     <group unless="$(arg bhand_present)">
-      <param name="robot_description" textfile="$(find wam_description)/urdf/wam_4dof.urdf" />
+      <param name="robot_description" command="$(find xacro)/xacro.py '$(find wam_description)/xacro/wam_4dof.urdf.xacro'" />
     </group>
   </group>
 
@@ -29,13 +28,12 @@
     We will launch the common launch files-->
 
 <!--Launching the robot_state_publisher at 50 Hz-->>
-<node pkg="robot_state_publisher" type="state_publisher" name="wam_st_pub" >
+<node pkg="robot_state_publisher" type="state_publisher" name="wam_st_pub" output="screen">
   <remap from="joint_states" to="wam/joint_states" />
 </node>
 
 
 <!--Launching the WAM Node-->
 <include file="$(find wam_node)/launch/wam_node.launch"/>
-
 
 </launch>

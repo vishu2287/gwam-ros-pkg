@@ -4,7 +4,7 @@
 
   <xacro:macro name="wam_base">
 
-    <link name="world"/>
+    <link name="wam_origin"/>
 
     <link name="wam_base">
         <inertial>
@@ -35,7 +35,7 @@
     </gazebo>
 
     <joint name="wam_base_joint" type="fixed">
-        <parent link="world"/>
+        <parent link="wam_origin"/>
         <child link="wam_base"/>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
      </joint>

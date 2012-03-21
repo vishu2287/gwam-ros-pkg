@@ -1,0 +1,9 @@
+<stack>
+  <description brief="gwam_common">gwam_common</description>
+  <author>Maintained by robot</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/gwam_common</url>
+  <depend stack="ros" />
+
+</stack>

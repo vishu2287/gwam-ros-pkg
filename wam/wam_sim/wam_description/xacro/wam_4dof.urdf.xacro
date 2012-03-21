@@ -3,7 +3,7 @@
        xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
        xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
        xmlns:xacro="http://ros.org/wiki/xacro"
-       name="wam">
+       name="wam_4dof">
   
   <!-- LINKS   -->  
   <include filename="$(find wam_description)/xacro/wam_base.urdf.xacro" />
