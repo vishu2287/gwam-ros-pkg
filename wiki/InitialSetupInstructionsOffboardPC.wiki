@@ -16,7 +16,7 @@ To use the Guardian-WAM in conjunction with a local pc, you must have installed 
 
 *Configure ROS Network Setup:*  (_On your personal computer only!_)
 
-You need to edit your */etc/hosts* file and add the following lines
+You need to edit your */etc/hosts* file with sudo permissions and add the following lines
 {{{
 192.168.2.100   guardian-WAM
 192.168.2.110   WAM
@@ -37,7 +37,7 @@ source /opt/ros/electric/setup.bash
 alias gwam_sim='export ROBOT=sim; export ROS_MASTER_URI=http://localhost:11311;'
 alias gwam_real='source ~/gwam_real_environment.sh'
 
-#Uncomment and fill in according the point to your ros packages
+#Uncomment and fill in accordingly the point to your ros packages
 #export ROS_PACKAGE_PATH=~/path_to_your_ros_packages:${ROS_PACKAGE_PATH}
 
 #Give the environment a default configuration (either gwam_sim or gwam_real).
@@ -47,7 +47,7 @@ gwam_sim
 Now that we have created our local environment file, we must create the automatic script for loading your ip and rosmaster.  Download this shell script with the following commands:
 {{{
 cd ~/
-wget http://www.web.barrett.com/support/
+wget http://gwam-ros-pkg.googlecode.com/files/gwam_real_environment.sh
 }}}
 
 In the last script we have exposed two commands to you.  You can now use the command line in any terminal and set up your environment variables very easily.  
@@ -72,3 +72,42 @@ env | grep ROS
 
 
 === Secure Shell Guardian PC Communication === 
+
+Another alternative for controlling the Guardian-WAM is using the onboard PC of the Guardian as the working machine.  
+
+Although this is not suggested it is an alternative for those who do not want to install ROS on a local machine.
+
+This is done by connecting the local PC to a network and accessing the Guardian PC remotely using a secure shell (ssh) client or remote terminal software.
+
+*_Linux_*
+
+You need to edit your */etc/hosts* file with sudo permissions and add the following lines
+{{{
+192.168.2.100   guardian-WAM
+192.168.2.110   WAM
+}}}
+
+In a new terminal, log into the Guardian PC using secure shell client software, ex.:
+{{{
+ssh guardian@guardian-WAM
+#username: guardian
+#password: GUARDIAN
+}}}
+
+Using the secure shell client you now have all the ability to control the Guardian-WAM using ROS.
+
+It is suggested that for any programs you create are located in the
+~/ros workspace that is already configured on the Guardian PC.
+
+If for any reason you need to log into the WAM PC (PC-104):
+{{{
+ssh robot@WAM
+#username: robot
+#password: WAM
+}}}
+
+All of the WAM ROS Software is located in the ~/ros workspace.  Please do not edit anything in the ~/ros/electric folder.
+
+
+
+Now that you have finished setting up and communicating with your Guardian-WAM please continue to: [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMROSInstallation gwam-ros-pkg Repository Installation Instructions.]
