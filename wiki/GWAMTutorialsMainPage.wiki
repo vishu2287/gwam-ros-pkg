@@ -1,5 +1,5 @@
+#summary Main Page with All of the GWAM Tutorials.
 #labels gwam,gwamtutorials,Tutorials
-#Main Page with All of the GWAM Tutorials.
 
 = Guardian-WAM Tutorials =
 
