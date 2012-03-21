@@ -3,4 +3,16 @@
 
 = Guardian-WAM Tutorials =
 
-This page describes various Tutorials for running the Guardian-WAM Software.
+=== Learn ROS ===
+Before starting to use the Guardian-WAM we strongly suggest that you have a thorough understanding of ROS.  
+
+Please complete the [http://www.ros.org/wiki/ROS/Tutorials ROS Introductory Tutorials].
+
+=== Real Robot Specific Tutorials ===
+
+[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsStartupGWAM Guardian-WAM Start Up]
+
+
+=== Simulated Robot Specific Tutorials === 
+
+[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsStartupGWAMSim Guardian-WAM Simulation Start Up]
