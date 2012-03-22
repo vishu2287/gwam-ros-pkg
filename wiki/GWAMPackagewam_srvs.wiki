@@ -30,6 +30,10 @@ This Package contains WAM / !BarrettHand specific service definitions.
 
 !OrtnMove
 
+BHandOpen
+
+BHandClose
+
 BHandSpreadPos
 
 BHandGraspPos
