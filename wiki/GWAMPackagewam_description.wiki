@@ -21,4 +21,4 @@ This package contains the URDF description of the various configurations of Barr
  * WAM 7-DOF
  * WAM 4-DOF
 
-This model will be used primarily for simulation, but may also be used to automate publishing of tf messages.
+This package will be used primarily for simulation, but may also be used to automate publishing of tf messages.
