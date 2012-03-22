@@ -51,7 +51,7 @@ wam/rt_ortn_pos _- type wam_msgs/RTOrtnPos_
 
 wam/gravity_comp _- type wam_srvs/!GravityComp_
 
-wam/go_home _- type wam_srvs/!GoHome_
+wam/go_home _- type std_srvs/Empty_
 
 wam/hold_joint_pos _- type wam_srvs/!HoldJointPos_
 
