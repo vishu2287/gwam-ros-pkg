@@ -1,14 +1,78 @@
-#summary Package: wam_node - Barrett WAM / Barrett Hand specific robot node.
+#summary Package: wam_node - Barrett WAM / BarrettHand specific robot node.
 
 = wam_node =
 
-This Package contains Barrett WAM / Barrett Hand control functionality.
+This Package contains Barrett WAM / BarrettHand control functionality.
 
  * Author: Kyle Maroney
  * License: BSD
  * Repository: gwam-ros-pkg
  * Source: svn https://gwam-ros-pkg.googlecode.com/svn/trunk/wam/wam_robot/wam_node
 
-*The wam_node is the primary communication node between the WAM / Barrett Hand and the ROS network.*
+*The wam_node is the primary communication node between the WAM / BarrettHand and ROS.*
 
-The wam_node was designed to abstract the Libbarrett functionality exposed by the [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagelibbarrett_ros libbarrett_ros package] into a simple, fully functional ROS node, allowing for both real-time and non real-time control of the Barrett WAM.
+The wam_node was designed to abstract the Libbarrett functionality exposed by the [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagelibbarrett_ros libbarrett_ros package] into a simple, fully functional ROS node.  Allowing for both real-time and non real-time control of the Barrett WAM.
+
+The wam_node package is self aware of robot configuration.  This means that if you have a 7-dof WAM configuration but want to use the robot without the BarrettHand the wam_node will take care of this.  Not publishing or subscribing to the services and messages available for a WAM with a BarrettHand.
+
+*Starting the wam_node*
+{{{
+roslaunch wam_node wam_node.launch
+}}}
+
+== Interaction with the WAM / BarrettHand == 
+
+=== The WAM Node Publishes the following topics (default: 100Hz) ===
+
+wam/joint_state - Publishes the current angle in radians for each joint present on the wam.
+
+wam/pose - Publishes the current pose (cartesian position and orientation).
+
+bhand/joint_state - Publishes the current angle in radians for each joint of the BarrettHand.
+
+=== The WAM Node Subscribes to the following topics - primarily for RT Control (up to 500Hz) ===
+
+wam/rt_joint_pos _- type wam_msgs/RTJointPos_
+
+wam/rt_joint_vel _- type wam_msgs/RTJointVel_
+
+wam/rt_cart_pos _- type wam_msgs/RTCartPos_
+
+wam/rt_cart_vel _- type wam_msgs/RTCartVel_
+
+wam/rt_ortn_pos _- type wam_msgs/RTOrtnPos_
+
+(TBD) wam/rt_ortn_vel _- type wam_msgs/RTOrtnVel_  
+
+
+=== The WAM Node offers the following Service Calls ===
+
+*WAM*
+
+wam/gravity_comp _- type wam_srvs/GravityComp_
+
+wam/go_home _- type wam_srvs/GoHome_
+
+wam/hold_joint_pos _- type wam_srvs/HoldJointPos_
+
+wam/hold_cart_pos _- type wam_srvs/HoldCartPos_
+
+wam/hold_ortn _- type wam_srvs/HoldOrtn_
+
+wam/joint_move _- type wam_srvs/JointMove_
+
+wam/pose_move _- type wam_srvs/PoseMove_
+
+wam/cart_pos_move _- type wam_srvs/CartPosMove_
+
+wam/ortn_move _- type wam_srvs/OrtnMove_
+
+*BarrettHand*
+
+bhand/spread_pos _- type wam_srvs/BHandSpreadPos_
+
+bhand/grasp_pos _- type wam_srvs/BHandGraspPos_
+
+bhand/spread_vel _- type wam_srvs/BHandSpreadVel_
+
+bhand/grasp_vel _- type wam_srvs/BHandGraspVel_
