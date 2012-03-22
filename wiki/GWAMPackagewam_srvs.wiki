@@ -1,9 +1,9 @@
-#summary Package: wam_srvs - WAM / Barrett Hand specific services
+#summary Package: wam_srvs - WAM / !BarrettHand specific services
 #labels wam_srvs
 
 = wam_srvs =
 
-This Package contains WAM / Barrett Hand specific service definitions.
+This Package contains WAM / !BarrettHand specific service definitions.
 
  * Author: Kyle Maroney
  * License: BSD
@@ -12,23 +12,23 @@ This Package contains WAM / Barrett Hand specific service definitions.
 
 = ROS Service Types =
 
-GravityComp
+!GravityComp
 
-GoHome
+!GoHome
 
-HoldJointPos
+!HoldJointPos
 
-HoldCartPos
+!HoldCartPos
 
-HoldOrtn
+!HoldOrtn
 
-JointMove
+!JointMove
 
-PoseMove
+!PoseMove
 
-CartPosMove
+!CartPosMove
 
-OrtnMove
+!OrtnMove
 
 BHandSpreadPos
 
