@@ -20,7 +20,7 @@ The wam_node package is self aware of robot configuration.  This means that if y
 roslaunch wam_node wam_node.launch
 }}}
 
-== __Interaction with the WAM / BarrettHand__ == 
+== __Interaction with the WAM / !BarrettHand__ == 
 
 === The WAM Node Publishes the following topics (default: 100Hz) ===
 
