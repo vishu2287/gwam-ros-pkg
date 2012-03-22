@@ -14,7 +14,7 @@ For Installation of gwam-ros-pkg please refer to the [http://code.google.com/p/g
 || *Component*      || *ROS package/stack* ||
 ||WAM-Specific Messages || [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagewam_msgs wam_msgs] ||
 ||WAM-Specific Services || [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagewam_srvs wam_srvs] ||
-||WAM Libbarrett Wrapper || [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagelibbarrett_ros libbarrett_ros ||
+||WAM Libbarrett Wrapper || [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagelibbarrett_ros libbarrett_ros] ||
 || WAM Model (URDF) || [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagewam_description wam_description] ||
 || Guardian Model (URDF) || [guardian_description] ||
 || GWAM Model (URDF) || [gwam_description] ||
