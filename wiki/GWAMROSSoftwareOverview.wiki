@@ -12,8 +12,11 @@ For Installation of gwam-ros-pkg please refer to the [http://code.google.com/p/g
 
 === Basic Configuration === 
 || *Component*      || *ROS package/stack* ||
-||Robot-specific Messages and Services|| [gwam_msgs] ||
-||Robot model (URDF)     || [gwam_description] ||
+||WAM-specific Messages || [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagewam_msgs wam_msgs] ||
+||WAM-specific Services || [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagewam_srvs wam_srvs] ||
+|| WAM Model (URDF) || [wam_description] ||
+|| Guardian Model (URDF) || [guardian_description] ||
+|| GWAM Model (URDF) || [gwam_description] ||
 
 === Hardware Drivers and Simulation ===
 || *Component*      || *ROS package/stack* ||
