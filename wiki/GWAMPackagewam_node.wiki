@@ -9,18 +9,18 @@ This Package contains Barrett WAM / BarrettHand control functionality.
  * Repository: gwam-ros-pkg
  * Source: svn https://gwam-ros-pkg.googlecode.com/svn/trunk/wam/wam_robot/wam_node
 
-*The wam_node is the primary communication node between the WAM / BarrettHand and ROS.*
+*The wam_node is the primary communication node between the WAM / !BarrettHand and ROS.*
 
 The wam_node was designed to abstract the Libbarrett functionality exposed by the [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagelibbarrett_ros libbarrett_ros package] into a simple, fully functional ROS node.  Allowing for both real-time and non real-time control of the Barrett WAM.
 
-The wam_node package is self aware of robot configuration.  This means that if you have a 7-dof WAM configuration but want to use the robot without the BarrettHand the wam_node will take care of this.  Not publishing or subscribing to the services and messages available for a WAM with a BarrettHand.
+The wam_node package is self aware of robot configuration.  This means that if you have a 7-dof WAM configuration but want to use the robot without the !BarrettHand the wam_node will take care of this.  Not publishing or subscribing to the services and messages available for a WAM with a !BarrettHand.
 
 *Starting the wam_node*
 {{{
 roslaunch wam_node wam_node.launch
 }}}
 
-== Interaction with the WAM / BarrettHand == 
+== __Interaction with the WAM / BarrettHand__ == 
 
 === The WAM Node Publishes the following topics (default: 100Hz) ===
 
@@ -49,25 +49,25 @@ wam/rt_ortn_pos _- type wam_msgs/RTOrtnPos_
 
 *WAM*
 
-wam/gravity_comp _- type wam_srvs/GravityComp_
+wam/gravity_comp _- type wam_srvs/!GravityComp_
 
-wam/go_home _- type wam_srvs/GoHome_
+wam/go_home _- type wam_srvs/!GoHome_
 
-wam/hold_joint_pos _- type wam_srvs/HoldJointPos_
+wam/hold_joint_pos _- type wam_srvs/!HoldJointPos_
 
-wam/hold_cart_pos _- type wam_srvs/HoldCartPos_
+wam/hold_cart_pos _- type wam_srvs/!HoldCartPos_
 
-wam/hold_ortn _- type wam_srvs/HoldOrtn_
+wam/hold_ortn _- type wam_srvs/!HoldOrtn_
 
-wam/joint_move _- type wam_srvs/JointMove_
+wam/joint_move _- type wam_srvs/!JointMove_
 
-wam/pose_move _- type wam_srvs/PoseMove_
+wam/pose_move _- type wam_srvs/!PoseMove_
 
-wam/cart_pos_move _- type wam_srvs/CartPosMove_
+wam/cart_pos_move _- type wam_srvs/!CartPosMove_
 
-wam/ortn_move _- type wam_srvs/OrtnMove_
+wam/ortn_move _- type wam_srvs/!OrtnMove_
 
-*BarrettHand*
+*!BarrettHand*
 
 bhand/spread_pos _- type wam_srvs/BHandSpreadPos_
 
