@@ -11,6 +11,8 @@ This Package contains Barrett WAM / !BarrettHand control functionality.
 
 *The wam_node is the primary communication node between the WAM / !BarrettHand and ROS.*
 
+*This node is designed to be launched on the WAM only!*
+
 The wam_node was designed to abstract the Libbarrett functionality exposed by the [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagelibbarrett_ros libbarrett_ros package] into a simple, fully functional ROS node.  Allowing for both real-time and non real-time control of the Barrett WAM.
 
 The wam_node package is self aware of robot configuration.  This means that if you have a 7-dof WAM configuration but want to use the robot without the !BarrettHand the wam_node will take care of this.  Not publishing or subscribing to the services and messages available for a WAM with a !BarrettHand.
