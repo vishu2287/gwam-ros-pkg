@@ -69,9 +69,9 @@ wam/ortn_move _- type wam_srvs/!OrtnMove_
 
 *!BarrettHand*
 
-bhand/close _- type wam_srvs/BHandClose_
+bhand/close _- type std_srvs/Empty_
 
-bhand/open _- type wam_srvs/BHandOpen_
+bhand/open _- type std_srvs/Empty_
 
 bhand/spread_pos _- type wam_srvs/BHandSpreadPos_
 
