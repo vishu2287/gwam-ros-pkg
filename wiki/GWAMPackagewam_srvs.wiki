@@ -1,0 +1,32 @@
+#summary Package: wam_srvs - WAM / Barrett Hand specific services
+#labels wam_srvs
+
+= wam_srvs =
+
+This Package contains WAM / Barrett Hand specific service definitions.
+
+ * Author: Kyle Maroney
+ * License: BSD
+ * Repository: gwam-ros-pkg
+ * Source: svn https://gwam-ros-pkg.googlecode.com/svn/trunk/wam/wam_common/wam_srvs
+
+= ROS Service Types =
+
+GravityComp
+
+GoHome
+
+HoldJointPos
+
+HoldCartPos
+
+HoldOrtn
+
+JointMove
+
+PoseMove
+
+CartPosMove
+
+OrtnMove
+
