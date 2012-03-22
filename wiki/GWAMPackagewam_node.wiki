@@ -1,0 +1,14 @@
+#summary Package: wam_node - Barrett WAM / Barrett Hand specific robot node.
+
+= wam_node =
+
+This Package contains Barrett WAM / Barrett Hand control functionality.
+
+ * Author: Kyle Maroney
+ * License: BSD
+ * Repository: gwam-ros-pkg
+ * Source: svn https://gwam-ros-pkg.googlecode.com/svn/trunk/wam/wam_robot/wam_node
+
+*The wam_node is the primary communication node between the WAM / Barrett Hand and the ROS network.*
+
+The wam_node was designed to abstract the Libbarrett functionality exposed by the [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagelibbarrett_ros libbarrett_ros package] into a simple, fully functional ROS node, allowing for both real-time and non real-time control of the Barrett WAM.
