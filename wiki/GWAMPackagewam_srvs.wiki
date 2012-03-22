@@ -16,11 +16,7 @@ This Package contains WAM / !BarrettHand specific service definitions.
 
 !GoHome
 
-!HoldJointPos
-
-!HoldCartPos
-
-!HoldOrtn
+Hold
 
 !JointMove
 
