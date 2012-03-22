@@ -28,7 +28,7 @@ wam/joint_states - Publishes the current angle in radians for each joint present
 
 wam/pose - Publishes the current pose (cartesian position and orientation).
 
-bhand/joint_states - Publishes the current angle in radians for each joint of the BarrettHand.
+bhand/joint_states - Publishes the current angle in radians for each joint of the !BarrettHand.
 
 === The WAM Node Subscribes to the following topics - primarily for RT Control (up to 500Hz) ===
 
