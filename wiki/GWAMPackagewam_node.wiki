@@ -24,11 +24,11 @@ roslaunch wam_node wam_node.launch
 
 === The WAM Node Publishes the following topics (default: 100Hz) ===
 
-wam/joint_state - Publishes the current angle in radians for each joint present on the wam.
+wam/joint_states - Publishes the current angle in radians for each joint present on the wam.
 
 wam/pose - Publishes the current pose (cartesian position and orientation).
 
-bhand/joint_state - Publishes the current angle in radians for each joint of the BarrettHand.
+bhand/joint_states - Publishes the current angle in radians for each joint of the BarrettHand.
 
 === The WAM Node Subscribes to the following topics - primarily for RT Control (up to 500Hz) ===
 
