@@ -2,7 +2,7 @@
 
 = wam_node =
 
-This Package contains Barrett WAM / BarrettHand control functionality.
+This Package contains Barrett WAM / !BarrettHand control functionality.
 
  * Author: Kyle Maroney
  * License: BSD
