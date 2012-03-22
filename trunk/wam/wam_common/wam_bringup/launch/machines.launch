@@ -1,0 +1,3 @@
+<launch>
+  <machine name="wam" address="WAM" ros-root="/home/robot/ros/electric/ros" ros-package-path="/home/robot/ros/gwam-ros-pkg:~/ros/electric" user="robot" password="WAM" />
+</launch>
