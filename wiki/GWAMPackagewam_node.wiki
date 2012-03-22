@@ -53,11 +53,11 @@ wam/gravity_comp _- type wam_srvs/!GravityComp_
 
 wam/go_home _- type std_srvs/Empty_
 
-wam/hold_joint_pos _- type wam_srvs/!HoldJointPos_
+wam/hold_joint_pos _- type wam_srvs/!Hold_
 
-wam/hold_cart_pos _- type wam_srvs/!HoldCartPos_
+wam/hold_cart_pos _- type wam_srvs/!Hold_
 
-wam/hold_ortn _- type wam_srvs/!HoldOrtn_
+wam/hold_ortn _- type wam_srvs/!Hold_
 
 wam/joint_move _- type wam_srvs/!JointMove_
 
