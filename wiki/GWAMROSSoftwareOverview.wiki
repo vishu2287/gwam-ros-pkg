@@ -21,7 +21,7 @@ For Installation of gwam-ros-pkg please refer to the [http://code.google.com/p/g
 
 === Hardware Drivers and Simulation ===
 || *Component*      || *ROS package/stack* ||
-|| WAM / BHand Node|| [wam_node] ||
+|| WAM / BHand Node|| [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagewam_node wam_node] ||
 || Guardian Node || [guardian_node] ||
 || GWAM Simulation || [gwam_bringup] ||
 
