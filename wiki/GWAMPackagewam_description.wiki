@@ -10,7 +10,7 @@ This Package contains WAM / Barrett Hand Unified Robot Description Format.
  * Repository: gwam-ros-pkg
  * Source: svn https://gwam-ros-pkg.googlecode.com/svn/trunk/wam/wam_sim/wam_description
 
-http://code.google.com/images/code_sm.png
+http://i.imgur.com/m1TX3.jpg
 
 = URDF =
 
