@@ -3,7 +3,7 @@
 
 = wam_description =
 
-This Package contains WAM / Barrett Hand Unified Robot Description Format Models for the Various Barrett Technology Products.
+This package contains WAM / Barrett Hand Unified Robot Description Format (URDF) models for the various Barrett Technology products.
 
  * Author: Kyle Maroney
  * License: BSD
