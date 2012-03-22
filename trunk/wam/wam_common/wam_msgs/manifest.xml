@@ -1,0 +1,14 @@
+<package>
+  <description brief="wam_msgs">
+
+     This Package contains WAM specific message definitions.
+
+  </description>
+  <author>Kyle Maroney, Barrett Technology Inc.</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/wam_msgs</url>
+
+</package>
+
+
