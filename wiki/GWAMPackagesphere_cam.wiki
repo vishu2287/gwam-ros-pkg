@@ -1,0 +1,12 @@
+#summary Sphere camera video
+
+= sphere_cam =
+
+This Package contains the Sphere camera video control functionality.
+
+ * Author: Román Navarro
+ * License: BSD
+
+
+= Details =
+
