@@ -71,14 +71,22 @@ wam/ortn_move _- type wam_srvs/!OrtnMove_
 
 *!BarrettHand*
 
-bhand/close _- type std_srvs/Empty_
+bhand/open_grasp _- type std_srvs/Empty_
 
-bhand/open _- type std_srvs/Empty_
+bhand/close_grasp _- type std_srvs/Empty_
 
-bhand/spread_pos _- type wam_srvs/BHandSpreadPos_
+bhand/open_spread _- type std_srvs/Empty_
+
+bhand/close_spread _- type std_srvs/Empty_
+
+bhand/finger_pos _- type wam_srvs/BHandFingerPos_
+
+bhand/finger_vel _- type wam_srvs/BHandFingerVel_
 
 bhand/grasp_pos _- type wam_srvs/BHandGraspPos_
 
-bhand/spread_vel _- type wam_srvs/BHandSpreadVel_
+bhand/spread_pos _- type wam_srvs/BHandSpreadPos_
 
 bhand/grasp_vel _- type wam_srvs/BHandGraspVel_
+
+bhand/spread_vel _- type wam_srvs/BHandSpreadVel_
