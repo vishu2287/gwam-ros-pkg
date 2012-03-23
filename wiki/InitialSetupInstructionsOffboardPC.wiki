@@ -18,7 +18,7 @@ To use the Guardian-WAM in conjunction with a local pc, you must have installed 
 
 You need to edit your */etc/hosts* file with sudo permissions and add the following lines
 {{{
-192.168.2.100   guardian-WAM
+192.168.2.100   guardian-wam
 192.168.2.110   WAM
 }}}
 
@@ -86,15 +86,15 @@ This is done by connecting the local PC to a network and accessing the Guardian 
 
 You need to edit your */etc/hosts* file with sudo permissions and add the following lines
 {{{
-192.168.2.100   guardian-WAM
+192.168.2.100   guardian-wam
 192.168.2.110   WAM
 }}}
 
 In a new terminal, log into the Guardian PC using secure shell client software, ex.:
 {{{
-ssh guardian@guardian-WAM
-#username: guardian
-#password: GUARDIAN
+ssh guardian@guardian-wam
+#username: guardian-wam
+#password: Tux007
 }}}
 
 Using the secure shell client you now have all the ability to control the Guardian-WAM using ROS.
