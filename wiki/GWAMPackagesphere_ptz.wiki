@@ -1,0 +1,8 @@
+#summary Sphere pan-tilt control
+
+= sphereptz =
+
+ * Author: Román Navarro García
+ * License: BSD
+
+= Details =
