@@ -65,7 +65,7 @@ wam/joint_move _- type wam_srvs/!JointMove_
 
 (TBD) wam/pose_move _- type wam_srvs/!PoseMove_
 
-wam/cart_pos_move _- type wam_srvs/!CartPosMove_
+wam/cart_move _- type wam_srvs/!CartPosMove_
 
 wam/ortn_move _- type wam_srvs/!OrtnMove_
 
