@@ -1,3 +1,3 @@
 float32[] joints
 ---
-std_msgs/String errorMessage
+std_msgs/String responseMessage
