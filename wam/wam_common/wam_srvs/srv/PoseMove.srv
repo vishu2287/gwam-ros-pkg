@@ -1,3 +1,3 @@
-float32[3] Position
-float32[4] Orientation
+float32[3] position
+float32[4] orientation
 ---
