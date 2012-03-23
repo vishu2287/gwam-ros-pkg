@@ -16,13 +16,13 @@ This Package contains WAM / !BarrettHand specific service definitions.
 
 *Hold* - Request: bool hold
 
-*!JointMove* - Request: float32[] joints (Must be equal to DOF of WAM)
+*!JointMove* - Request: float32{{{[]}}} joints (Must be equal to DOF of WAM)
 
 *!PoseMove* - Request: geometry_msgs/Pose pose
 
-*!CartPosMove* - Request: float32[3] position
+*!CartPosMove* - Request: float32{{{[3]}}} position
 
-*!OrtnMove* - Request: float32[4] orientation
+*!OrtnMove* - Request: float32{{{[4]}}} orientation
 
 *BHandFingerPos* - Request: int8 finger, float32 radians
 
