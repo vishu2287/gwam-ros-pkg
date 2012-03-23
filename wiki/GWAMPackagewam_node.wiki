@@ -81,11 +81,11 @@ bhand/close_spread _- type std_srvs/Empty_
 
 bhand/finger_pos _- type wam_srvs/BHandFingerPos_
 
-bhand/finger_vel _- type wam_srvs/BHandFingerVel_
-
 bhand/grasp_pos _- type wam_srvs/BHandGraspPos_
 
 bhand/spread_pos _- type wam_srvs/BHandSpreadPos_
+
+bhand/finger_vel _- type wam_srvs/BHandFingerVel_
 
 bhand/grasp_vel _- type wam_srvs/BHandGraspVel_
 
