@@ -22,7 +22,7 @@ For Installation of gwam-ros-pkg please refer to the [http://code.google.com/p/g
 === Hardware Drivers and Simulation ===
 || *Component*      || *ROS package/stack* ||
 || WAM / BHand Node|| [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagewam_node wam_node] ||
-|| Guardian / Guardian Node || [guardian_node] ||
+|| Guardian / Guardian Node || [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackageguardian_node guardian_node] ||
 || Guardian / Sphere Cam || [sphere_cam] ||
 || Guardian / Sphere Pan-tilt || [sphereptz] ||
 || Guardian / Module I/O || [modbus_io] ||
