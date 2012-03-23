@@ -1,0 +1,10 @@
+#summary I/O module through modbus
+
+= modbus_io =
+
+This Package contains the mod-bus I/O module control functionality.
+
+ * Author: Román Navarro García
+ * License: BSD
+
+= Details =
