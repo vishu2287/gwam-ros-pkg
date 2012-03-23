@@ -12,28 +12,26 @@ This Package contains WAM / !BarrettHand specific service definitions.
 
 = ROS Service Types =
 
-!GravityComp
+*!GravityComp* - Request: bool gravity 
 
-!GoHome
+*Hold* - Request: bool hold
 
-Hold
+*!JointMove* - Request: float32[] joints (Must be equal to DOF of WAM)
 
-!JointMove
+*!PoseMove* - Request: geometry_msgs/Pose pose
 
-!PoseMove
+*!CartPosMove* - Request: float32[3] position
 
-!CartPosMove
+*!OrtnMove* - Request: float32[4] orientation
 
-!OrtnMove
+*BHandFingerPos* - Request: int8 finger, float32 radians
 
-BHandFingerPos
+*BHandGraspPos* - Request: float32 radians
 
-BHandFingerPos
+*BHandSpreadPos* - Request: float32 radians
 
-BHandSpreadPos
+*BHandFingerVel* - Request: int8 finger, float32 velocity
 
-BHandGraspPos
+*BHandGraspVel* - Request: float32 velocity
 
-BHandSpreadVel
-
-BHandGraspVel
+*BHandSpreadVel* - Request: float32 velocity
