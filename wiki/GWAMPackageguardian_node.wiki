@@ -1,0 +1,17 @@
+# Guardian node information
+
+= guardian_node =
+
+This Package contains the Guardian control functionality.
+
+ * Author: Roman Navarro
+ * License: BSD
+ * Repository: gwam-ros-pkg
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
