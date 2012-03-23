@@ -26,6 +26,10 @@ Hold
 
 !OrtnMove
 
+BHandFingerPos
+
+BHandFingerPos
+
 BHandSpreadPos
 
 BHandGraspPos
