@@ -1,0 +1,11 @@
+#summary Microstrain IMU node
+
+= microstrain_imu =
+
+This Package contains the Microstrain IMU control functionality.
+
+ * Author: Román Navarro García
+ * License: BSD
+
+
+= Details =
