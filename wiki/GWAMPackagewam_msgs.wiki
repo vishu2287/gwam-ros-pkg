@@ -11,14 +11,14 @@ This Package contains WAM specific message definitions.
 
 = ROS Message Types =
 
-RTJointPos
+*RTJointPos* - Type: float32{{{[]}}} joints
 
-RTJointVel
+*RTJointVel* - Type: float32 direction, float32 magnitude 
 
-RTCartPos
+*RTCartPos* - Type: float32{{{[3]}}} position
 
-RTCartVel
+*RTCartVel* - Type: float32{{{[3]}}} direction, float32 magnitude
 
-RTOrtnPos
+*RTOrtnPos* - Type: float32{{{[4]}}} quaternion
 
-RTOrtnVel
+*RTOrtnVel* - Type: float32{{{[3]}}} angular, float32 magnitude
