@@ -8,7 +8,6 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/wam_srvs</url>
-  <depend package="std_msgs" />
 </package>
 
 
