@@ -92,7 +92,7 @@ You need to edit your */etc/hosts* file with sudo permissions and add the follow
 
 In a new terminal, log into the Guardian PC using secure shell client software, ex.:
 {{{
-ssh guardian@guardian-wam
+ssh guardian-wam@guardian-wam
 #username: guardian-wam
 #password: Tux007
 }}}
