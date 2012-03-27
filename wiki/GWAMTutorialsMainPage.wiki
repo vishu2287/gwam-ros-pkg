@@ -10,7 +10,16 @@ Please complete the [http://www.ros.org/wiki/ROS/Tutorials ROS Introductory Tuto
 
 === Real Robot Specific Tutorials ===
 
+*_WAM Specific Tutorials_*
+
+[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsWAMJoystickTeleop Writing a WAM Joystick Teleoperation Node]
+
+[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsStartupWAM WAM Start Up]
+
+*_Guardian-WAM Specific Tutorials_*
+
 [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsStartupGWAM Guardian-WAM Start Up]
+
 
 [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsWAMJoystickTeleop Writing a WAM Joystick Teleoperation Node]
 
