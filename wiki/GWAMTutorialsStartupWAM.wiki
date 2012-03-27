@@ -1,0 +1,5 @@
+#summary A tutorial describing how to start the WAM ROS Node.
+
+= Starting the Barrett WAM / !BarrettHand ROS Node =
+
+*This tutorial describes how to start the Barrett WAM & !BarrettHand in ROS.*
