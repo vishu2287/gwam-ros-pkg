@@ -1,0 +1,14 @@
+<package>
+  <description brief="wam_teleop">
+
+     wam_teleop
+
+  </description>
+  <author>robot</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/wam_teleop</url>
+
+</package>
+
+
