@@ -1,4 +1,5 @@
-# Guardian node information
+#summary Package: Guardian node information
+
 
 = guardian_node =
 
@@ -8,10 +9,23 @@ This Package contains the Guardian control functionality.
  * License: BSD
  * Repository: gwam-ros-pkg
 
+*The guardian_node is the node in charge of the communication with the motors controller and the odometry update*
 
-= Details =
+*Starting the guardian_node*
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+{{{roslaunch guardian_node guardian_real.launch}}}
+
+
+== Interaction with the Guardian Node ==
+
+=== The guardian_node publishes the following topics (Default: 15Hz) ===
+
+/guardian_node/odom  - Publishes the odometry of the robot
+
+/guardian_node/state - Publishes the general state of the robot
+
+=== The guardian_node subscribes to the following topis ===
+
+/guardian_node/command  - Read the velocity commands
+
+/modbus_io/input_output - Read the current state of the inputs/outputs module 
