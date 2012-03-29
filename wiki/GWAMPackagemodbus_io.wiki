@@ -1,4 +1,4 @@
-#summary I/O module through modbus
+#summary modbus I/O module
 
 = modbus_io =
 
@@ -7,4 +7,28 @@ This Package contains the mod-bus I/O module control functionality.
  * Author: Román Navarro García
  * License: BSD
 
-= Details =
+
+*The modbus_io node manages the communication with with an I/O module via modbus*
+
+The module offers a range of 8 digital I/O and 2 analog I/O
+
+By default, the digital input 1 is reserved
+
+
+*Starting the modbus_io node*
+
+{{{roslaunch modbus_io test_io.launch}}}
+
+
+== Interaction with the Modbus_io Node ==
+
+=== The modbus_io publishes the following topics (Default: 20Hz) ===
+
+/input_output  - Publishes the current state of all the I/O
+
+
+=== The modbus_io offers the following services ===
+
+/write_digital_output - _ Type write_digital_output.srv _
+
+/write_analog_output  - _ Type write_analog_output.srv _ 
