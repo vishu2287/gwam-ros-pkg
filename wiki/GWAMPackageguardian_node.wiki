@@ -1,4 +1,4 @@
-#summary Package: Guardian node information
+#summary Guardian node information
 
 
 = guardian_node =
