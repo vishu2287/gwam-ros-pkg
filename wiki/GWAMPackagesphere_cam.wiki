@@ -1,12 +1,47 @@
 #summary Sphere camera video
 
-= sphere_cam =
+= usb_cam =
 
-This Package contains the Sphere camera video control functionality.
+This Package contains the Sphere camera video functionality.
 
  * Author: Román Navarro
  * License: BSD
 
+*The usb_cam manages the communication with the camera Logitech SphereCam*
 
-= Details =
+This node process the video images and publishes them.
 
+*Starting the usb_cam*
+
+{{{roslaunch logitech_usb_webcam low_res.launch}}}
+
+
+== Interaction with the Usbcam Node ==
+
+=== The usb_cam publishes the following topics (Default: 15Hz) ===
+
+/logitech_usb_webcam/camera_info
+
+/logitech_usb_webcam/image_raw
+
+/logitech_usb_webcam/image_raw/compressed
+
+/logitech_usb_webcam/image_raw/compressed/parameter_descriptions
+
+/logitech_usb_webcam/image_raw/compressed/parameter_updates
+
+/logitech_usb_webcam/image_raw/theora
+
+/logitech_usb_webcam/image_raw/theora/parameter_descriptions
+
+/logitech_usb_webcam/image_raw/theora/parameter_updates
+
+=== The usb_cam offers the following services ===
+
+/logitech_usb_webcam/get_loggers
+
+/logitech_usb_webcam/image_raw/compressed/set_parameters
+
+/logitech_usb_webcam/image_raw/theora/set_parameters
+
+/logitech_usb_webcam/set_logger_level
