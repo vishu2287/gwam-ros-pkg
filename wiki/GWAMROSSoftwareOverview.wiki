@@ -23,7 +23,7 @@ For Installation of gwam-ros-pkg please refer to the [http://code.google.com/p/g
 || *Component*      || *ROS package/stack* ||
 || WAM / BHand Node|| [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagewam_node wam_node] ||
 || Guardian / Guardian Node || [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackageguardian_node guardian_node] ||
-|| Guardian / Sphere Cam || [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagesphere_cam sphere_cam] ||
+|| Guardian / Sphere Cam || [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagesphere_cam usb_cam] ||
 || Guardian / Sphere Pan-tilt || [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagesphere_ptz sphere_ptz] ||
 || Guardian / Module I/O ||  [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagemodbus_io modbus_io] ||
 || Guardian / IMU ||  [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagemicrostrain_imu microstrain_imu] ||
