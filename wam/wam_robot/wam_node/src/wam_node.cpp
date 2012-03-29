@@ -98,7 +98,6 @@ template<typename T1, typename T2, typename OutputType>
 class ToQuaternion : public systems::SingleIO<math::Vector<3>::type, Eigen::Quaterniond>
 {
 public:
-  math::Vector<3>::type inputRPY;
   Eigen::Quaterniond outputQuat;
 
 public:
@@ -112,9 +111,10 @@ public:
   }
 
 protected:
+  btQuaternion q;
   virtual void operate()
   {
-    btQuaternion q;
+    const math::Vector<3>::type &inputRPY = input.getValue();
     q.setEulerZYX(inputRPY[2], inputRPY[1], inputRPY[0]);
     outputQuat.x() = q.getX();
     outputQuat.y() = q.getY();
@@ -162,9 +162,10 @@ protected:
   systems::Summer<units::CartesianPosition::type> cart_pos_sum;
   systems::Summer<math::Vector<3>::type> ortn_cmd_sum;
   systems::Ramp ramp;
-  Multiplier<double, units::CartesianPosition::type, units::CartesianPosition::type> linear;
-  Multiplier<double, math::Vector<3>::type, math::Vector<3>::type> angular;
-  ToQuaternion to_quat;
+  Multiplier<double, units::CartesianPosition::type, units::CartesianPosition::type> mult_linear;
+  Multiplier<double, math::Vector<3>::type, math::Vector<3>::type> mult_angular;
+  ToQuaternion to_quat, to_quat_print;
+  Eigen::Quaterniond ortn_print;
   ros::Time last_cart_vel_msg_time, last_ortn_vel_msg_time;
   ros::Duration rt_msg_timeout;
 
@@ -259,7 +260,7 @@ public:
 // Templated Initialization Function
 template<size_t DOF>
   void WamNode::init(ProductManager& pm)
-  {
+  { 
     BARRETT_UNITS_TEMPLATE_TYPEDEFS(DOF);
 
     wam4 = NULL;
@@ -704,22 +705,23 @@ template<size_t DOF>
 
 //Function to update the real-time control loops
 template<size_t DOF>
-  void WamNode::updateRT(ProductManager& pm)
+  void WamNode::updateRT(ProductManager& pm)//systems::PeriodicDataLogger<debug_tuple>& logger
   {
     BARRETT_UNITS_TEMPLATE_TYPEDEFS(DOF);
     systems::Wam<DOF> &wam = *getWam<DOF>(pm);
 
+
     //Real-Time Cartesian Velocity Control Portion
     if (last_cart_vel_msg_time + rt_msg_timeout > ros::Time::now()) // checking if a cartesian velocity message has been published and if it is within timeout
-    {
+    {    
       if (!cart_vel_status)
       {
         cart_dir.setValue(cp_type(0.0, 0.0, 0.0)); // zeroing the cartesian direction
         current_cart_pos.setValue(wam.getToolPosition()); // Initializing the cartesian position 
         current_ortn.setValue(wam.getToolOrientation()); // Initializing the orientation 
-        systems::forceConnect(ramp.output, linear.input1); // connecting the ramp to multiplier
-        systems::forceConnect(cart_dir.output, linear.input2); // connecting the direction to the multiplier
-        systems::forceConnect(linear.output, cart_pos_sum.getInput(0)); // adding the output of the multiplier
+        systems::forceConnect(ramp.output, mult_linear.input1); // connecting the ramp to multiplier
+        systems::forceConnect(cart_dir.output, mult_linear.input2); // connecting the direction to the multiplier
+        systems::forceConnect(mult_linear.output, cart_pos_sum.getInput(0)); // adding the output of the multiplier
         systems::forceConnect(current_cart_pos.output, cart_pos_sum.getInput(1)); // with the starting cartesian position offset
         systems::forceConnect(cart_pos_sum.output, rt_pose_cmd.getInput<0>()); // saving summed position as new commanded pose.position
         systems::forceConnect(current_ortn.output, rt_pose_cmd.getInput<1>()); // saving the original orientation to the pose.orientation
@@ -727,7 +729,7 @@ template<size_t DOF>
         ramp.stop(); // ramp is stopped on startup
         ramp.setOutput(0.0); // ramp is re-zeroed on startup
         ramp.start(); // start the ramp
-        wam.trackReferenceSignal(rt_pose_cmd.output); // tell the WAM to track the RT commanded (500 Hz) updated pose
+        wam.trackReferenceSignal(rt_pose_cmd.output); // command WAM to track the RT commanded (500 Hz) updated pose
       }
       else if (new_rt_cmd)
       {
@@ -741,6 +743,8 @@ template<size_t DOF>
       cart_vel_status = true;
       new_rt_cmd = false;
     }
+
+ 
     //Real-Time Angular Velocity Control Portion
     else if (last_ortn_vel_msg_time + rt_msg_timeout > ros::Time::now()) // checking if a orientation velocity message has been published and if it is within timeout
     {
@@ -750,9 +754,9 @@ template<size_t DOF>
         current_cart_pos.setValue(wam.getToolPosition()); // Initializing the cartesian position 
         current_rpy_ortn.setValue(toRPY(wam.getToolOrientation())); // Initializing the orientation 
 
-        systems::forceConnect(ramp.output, angular.input1); // connecting the ramp to multiplier
-        systems::forceConnect(rpy_cmd.output, angular.input2); // connecting the rpy command to the multiplier
-        systems::forceConnect(angular.output, ortn_cmd_sum.getInput(0)); // adding the output of the multiplier
+        systems::forceConnect(ramp.output, mult_angular.input1); // connecting the ramp to multiplier
+        systems::forceConnect(rpy_cmd.output, mult_angular.input2); // connecting the rpy command to the multiplier
+        systems::forceConnect(mult_angular.output, ortn_cmd_sum.getInput(0)); // adding the output of the multiplier
         systems::forceConnect(current_rpy_ortn.output, ortn_cmd_sum.getInput(1)); // with the starting rpy orientation offset
         systems::forceConnect(ortn_cmd_sum.output, to_quat.input);
         systems::forceConnect(current_cart_pos.output, rt_pose_cmd.getInput<0>()); // saving the original position to the pose.position
@@ -761,26 +765,24 @@ template<size_t DOF>
         ramp.stop(); // ramp is stopped on startup
         ramp.setOutput(0.0); // ramp is re-zeroed on startup
         ramp.start(); // start the ramp
-        wam.trackReferenceSignal(rt_pose_cmd.output); // tell the WAM to track the RT commanded (500 Hz) updated pose
+        wam.trackReferenceSignal(rt_pose_cmd.output); // command the WAM to track the RT commanded (500 Hz) updated pose
       }
       else if (new_rt_cmd)
       {
-        BARRETT_SCOPED_LOCK(pm.getMutex());
-        //Forces us into real-time
+        BARRETT_SCOPED_LOCK(pm.getMutex());//Forces us into real-time
         ramp.reset(); // reset the ramp to 0
         ramp.setSlope(ortn_vel_mag); // updating the commanded angular velocity magnitude
-        rpy_cmd.setValue(math::Vector<3>::type(rt_ortn_vel[0], rt_ortn_vel[1], rt_ortn_vel[2])); // set our angular rpy command to subscribed command
+        rpy_cmd.setValue(math::Vector<3>::type(rt_ortn_vel[0], rt_ortn_vel[1], rt_ortn_vel[2])); // set our angular rpy command to subscribed command 
         current_rpy_ortn.setValue(toRPY(wam.tpoToController.referenceInput.getValue())); // updating the current orientation to the actual low level commanded value
+        //current_rpy_ortn.setValue(toRPY(wam.getToolOrientation()));
       }
       ortn_vel_status = true;
       new_rt_cmd = false;
     }
-    else
-    {
-      if (cart_vel_status | ortn_vel_status)
+    else if(cart_vel_status | ortn_vel_status){
         wam.moveTo(wam.getJointPositions()); // Holds current joint positions upon a RT message timeout 
-      cart_vel_status = false;
-      ortn_vel_status = false;
+        cart_vel_status = false;
+        ortn_vel_status = false;
     }
   }
 
@@ -789,18 +791,21 @@ template<size_t DOF>
   int wam_main(int argc, char** argv, ProductManager& pm, systems::Wam<DOF>& wam)
   {
     BARRETT_UNITS_TEMPLATE_TYPEDEFS(DOF);
+       
     wam.gravityCompensate(true); // Turning on Gravity Compenstation by Default when starting the WAM Node
     ros::init(argc, argv, "wam_node");
     WamNode wam_node;
     wam_node.init<DOF>(pm);
     ros::Rate pub_rate(PUBLISH_FREQ);
+
     while (ros::ok() && pm.getSafetyModule()->getMode() == SafetyModule::ACTIVE)
     {
       ros::spinOnce();
-      wam_node.publish<DOF>(pm);
+      wam_node.publish<DOF>(pm); 
       wam_node.updateRT<DOF>(pm);
       pub_rate.sleep();
     }
+    
     return 0;
   }
 
