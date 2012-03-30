@@ -14,6 +14,28 @@ There are two primary communication techniques with the Guardian WAM:
 
 To use the Guardian-WAM in conjunction with a local pc, you must have installed a local copy of ROS Electric.  Installation instructions are available here: [http://www.ros.org/wiki/electric/Installation/Ubuntu ROS Electric Installation].
 
+*Add your personal computer to router access list* (_PLEASE CONTACT YOUR ADMINISTRATOR TO DO THIS_)
+
+*The administrator must do the following to give access to new computer.*
+
+Log into the guardian-wam wireless network
+
+ssid: GWAM
+
+password: BarrettRobotnik
+
+# Log into access point #
+
+_In web browser address bar_
+
+192.168.2.1
+
+Login: Admin
+
+Password: 1234  // The admin may choose to change this at any time
+
+##TODO COMPLETE##
+
 *Configure ROS Network Setup:*  (_On your personal computer only!_)
 
 You need to edit your */etc/hosts* file with sudo permissions and add the following lines
@@ -94,7 +116,7 @@ In a new terminal, log into the Guardian PC using secure shell client software, 
 {{{
 ssh guardian-wam@guardian-wam
 #username: guardian-wam
-#password: Tux007
+#password: guardian
 }}}
 
 Using the secure shell client you now have all the ability to control the Guardian-WAM using ROS.
