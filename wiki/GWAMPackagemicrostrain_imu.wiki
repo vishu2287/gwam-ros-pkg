@@ -1,11 +1,34 @@
 #summary Microstrain IMU node
 
-= microstrain_imu =
+= microstrain_3dmgx2_imu =
 
-This Package contains the Microstrain IMU control functionality.
+This Package contains the control functionality of IMU Microstrain 3DMGX2.
 
  * Author: Román Navarro García
  * License: BSD
 
 
-= Details =
+*The microstrain_3dmgx2_imu manages the communication with the imu*
+
+This node gets the information from the device and publishes it.
+
+*Starting the microstrain_3dmgx2_imu*
+
+{{{roslaunch microstrain_3dmgx2_imu microstrain_3dmgx2.launch}}}
+
+
+== Interaction with the IMU Node ==
+
+=== The microstrain_3dmgx2_imu publishes the following topics (Default: 100Hz) ===
+
+/diagnostics
+
+/imu/data -- Type sensor_msgs::Imu
+
+/imu/is_calibrated
+
+=== The microstrain_3dmgx2_imu offers the following services ===
+
+/imu/calibrate
+
+/microstrain_3dmgx2_node/add_offset
