@@ -18,7 +18,7 @@ const int CNTRL_FREQ = 50; // Frequency at which we will publish our control mes
 class WamTeleop
 {
 public:
-  ros::NodeHandle n_, nw_, nh_; // NodeHandles for publishing / subscribing on topics "/wam/..." & "/..."
+  ros::NodeHandle n_, nw_, nh_; // NodeHandles for publishing / subscribing on topics "/... & /wam/..." & "/bhand/..."
 
   // Boolean statuses for commanded states
   bool pose_pubbed, grsp_publish, sprd_publish;
@@ -103,6 +103,7 @@ void WamTeleop::init()
 
   hold.request.hold = false; // Default Start for joint hold command is false
   cart_publish = ortn_publish = false; // Setting publisher states to false 
+  bh_cmd_st = 0;// Initializing BarrettHand Command State to Zero
 
   //Subscribers
   joy_sub = n_.subscribe < sensor_msgs::Joy > ("joy", 1, &WamTeleop::joyCallback, this); // /joy
@@ -215,15 +216,15 @@ void WamTeleop::joyCallback(const sensor_msgs::Joy::ConstPtr& joy_msg)
 
 // Function for updating the commands and publishing
 void WamTeleop::update()
-{ 
+{
   //Check our publish hand states and act accordingly
-  if (grsp_publish && bh_cmd_st == 0 && !cart_publish && !ortn_publish) // Only if grasp publish state is set
+  if (grsp_publish && bh_cmd_st == 0 && !sprd_publish && !cart_publish && !ortn_publish) // Only if grasp publish state is set
   {
     grasp_vel.request.velocity = bh_grsp_vel; // set grasp velocity to commanded
     grasp_vel_srv.call(grasp_vel); // call grasp velocity service
     bh_cmd_st = 1; // set the BarrettHand commanded state to signify grasp command
   }
-  else if (sprd_publish && bh_cmd_st == 0 && !cart_publish && !ortn_publish)  // only if spread publish state is set
+  else if (sprd_publish && bh_cmd_st == 0 && !grsp_publish && !cart_publish && !ortn_publish)  // only if spread publish state is set
   {
     spread_vel.request.velocity = bh_sprd_vel; // set spread velocity to commanded
     spread_vel_srv.call(spread_vel); // call spread velocity service
@@ -236,7 +237,7 @@ void WamTeleop::update()
       grasp_vel.request.velocity = 0.0; // Zero the velocity
       grasp_vel_srv.call(grasp_vel); // Command zero velocity to grasp
     }
-    else if (bh_cmd_st == 2) // if Barretthand state is in spread mode
+    if (bh_cmd_st == 2) // if Barretthand state is in spread mode
     {
       spread_vel.request.velocity = 0.0; // Zero the velocity 
       spread_vel_srv.call(spread_vel); // Command zero velocity to spread
