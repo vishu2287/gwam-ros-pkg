@@ -25,11 +25,15 @@
 #include "std_srvs/Empty.h"
 #include "sensor_msgs/JointState.h"
 #include "geometry_msgs/PoseStamped.h"
+#include "bypass_safety_module.h"
 
 #include <barrett/math.h> 
 #include <barrett/units.h>
 #include <barrett/systems.h>
 #include <barrett/products/product_manager.h>
+#define BARRETT_SMF_CONFIGURE_PM
+#define BARRETT_SMF_DONT_PROMPT_ON_ZEROING
+#define BARRETT_SMF_DONT_WAIT_FOR_SHIFT_ACTIVATE
 #include <barrett/standard_main_function.h>
 #include <barrett/systems/wam.h>
 #include <barrett/detail/stl_utils.h>
@@ -51,13 +55,13 @@ template<>
   systems::Wam<7>*
   getWam(ProductManager& pm)
   {
-    return pm.getWam7();
+    return pm.getWam7(false);
   }
 template<>
   systems::Wam<4>*
   getWam(ProductManager& pm)
   {
-    return pm.getWam4();
+    return pm.getWam4(false);
   }
 
 //Creating a templated multiplier for our real-time computation
@@ -285,17 +289,20 @@ template<size_t DOF>
 
     if (DOF == 4) //4-DOF specific initialization
     {
-      wam4 = pm.getWam4(); //pointer to systems::Wam<4> object for functions that cannot be templated 
+      std::cout << "4-DOF WAM" << std::endl;
+      wam4 = pm.getWam4(false); //pointer to systems::Wam<4> object for functions that cannot be templated 
       jp4_home = wam4->getJointPositions();
     }
     else if (DOF == 7) //7-DOF specific initialization
     {
-      wam7 = pm.getWam7(); //pointer to systems::Wam<7> object for functions that cannot be templated 
+      std::cout << "7-DOF WAM" << std::endl;
+      wam7 = pm.getWam7(false); //pointer to systems::Wam<7> object for functions that cannot be templated 
       jp7_home = wam7->getJointPositions();
     }
 
     if (pm.foundHand()) //Does the following only if a BarrettHand is present
     {
+      std::cout << "Barrett Hand" << std::endl;
       hand = pm.getHand();
       // Move j3 in order to give room for hand initialization
       jp_type jp_init = wam.getJointPositions();
@@ -356,6 +363,9 @@ template<size_t DOF>
     pose_move_srv = n_.advertiseService("pose_move", &WamNode::poseMove, this); // wam/pose_move
     cart_move_srv = n_.advertiseService("cart_move", &WamNode::cartMove, this); // wam/cart_pos_move
     ortn_move_srv = n_.advertiseService("ortn_move", &WamNode::ortnMove, this); // wam/ortn_move
+    
+    std::cout << "Wam Node Active" << std::endl;
+
   }
 
 // gravity_comp service callback
@@ -786,12 +796,44 @@ template<size_t DOF>
     }
   }
 
+// Product Manager configuration necessary to preempt the standard main function, allowing for pendantless operation.
+bool configure_pm(int argc, char** argv, ProductManager& pm)
+{
+   std::cout << "Starting WAM Node" << std::endl;
+
+   SafetyModule* sm = pm.getSafetyModule();
+
+   bypassSafetyModule(sm);
+
+   SafetyModule::PendantState ps;
+   
+   sm->getPendantState(&ps);
+   
+   if(ps.pressedButton == SafetyModule::PendantState::ESTOP)
+     std::cout << "Please Release the WAM ESTOP to start the wam_node" << std::endl;
+   while(ps.pressedButton == SafetyModule::PendantState::ESTOP)
+   {
+     sm->getPendantState(&ps);
+     usleep(100000);
+   }
+  
+   sm->setMode(SafetyModule::IDLE);
+
+   sm->waitForMode(SafetyModule::IDLE,false);
+
+   return true;
+}
+
 //wam_main Function
 template<size_t DOF>
   int wam_main(int argc, char** argv, ProductManager& pm, systems::Wam<DOF>& wam)
   {
     BARRETT_UNITS_TEMPLATE_TYPEDEFS(DOF);
-       
+    
+    usleep(250000);
+    pm.getSafetyModule()->setMode(SafetyModule::ACTIVE);
+    usleep(250000);
+
     wam.gravityCompensate(true); // Turning on Gravity Compenstation by Default when starting the WAM Node
     ros::init(argc, argv, "wam_node");
     WamNode wam_node;
