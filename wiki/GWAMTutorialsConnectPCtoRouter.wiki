@@ -1,0 +1,25 @@
+#summary This tutorial describes how to connect an external computer to the Guardian-WAM router
+
+= Connecting External PC to Guardian-WAM Router =
+
+*Add your personal computer to router access list* (_PLEASE CONTACT YOUR ADMINISTRATOR TO DO THIS_)
+
+*The administrator must do the following to give access to new computer.*
+
+Log into the guardian-wam wireless network
+
+ssid: GWAM
+
+password: BarrettRobotnik
+
+# Log into access point #
+
+_In web browser address bar_
+
+192.168.2.1
+
+Login: Admin
+
+Password: 1234  // The admin may choose to change this at any time
+
+##TODO COMPLETE##
