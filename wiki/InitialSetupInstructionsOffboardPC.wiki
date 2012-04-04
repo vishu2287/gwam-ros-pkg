@@ -85,6 +85,11 @@ This is done by connecting the local PC to a network and accessing the Guardian 
 
 *_Linux_*
 
+To use this communication approach, you must have access to the Guardian-WAM Router.  For instructions on how to connect your computer to the Guardian-WAM router please follow the tutorial:
+
+[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsConnectPCtoRouter  Connecting External PC to Guardian-WAM Router]
+
+
 You need to edit your */etc/hosts* file with sudo permissions and add the following lines
 {{{
 192.168.2.100   guardian-wam
