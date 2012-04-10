@@ -26,13 +26,13 @@ roslaunch wam_bringup wam_real.launch
 
 The deadman switches were introduced to ensure safety and eliminate unwanted motion commands.  
 
-To control the Guardian you must be holding down *R1*.
+To control the Guardian you must be holding down {{{R1}}}.
 
 To control the WAM you must be holding down *L1*.  For WAM orientation control you must be holding down *L1* & *L2*.
 
 http://i.imgur.com/B7hkI.png
 
-While holding R1, you can control the Guardian using the joystick
+While holding {{{R1}}}, you can control the Guardian using the joystick
 
 http://i.imgur.com/j7wxV.png
 
