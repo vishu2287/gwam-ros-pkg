@@ -31,7 +31,7 @@ For Installation of gwam-ros-pkg please refer to the [http://code.google.com/p/g
 
 === High-Level Capabilities ===
 || *Component*      || *ROS package/stack* ||
-|| Teleop|| [gwam_joystick_teleop] ||
+|| Teleop|| [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMJoystickTeleop gwam_joystick_teleop] ||
 || Navigation || [guardian_navigation] ||
 || Arm Navigation || [TBD] ||
 
