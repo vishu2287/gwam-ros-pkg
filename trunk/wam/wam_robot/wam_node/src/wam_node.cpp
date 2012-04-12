@@ -119,7 +119,7 @@ protected:
   virtual void operate()
   {
     const math::Vector<3>::type &inputRPY = input.getValue();
-    q.setEulerZYX(inputRPY[2], inputRPY[1], inputRPY[0]);
+    q.setRPY(inputRPY[0], inputRPY[1], inputRPY[2]);
     outputQuat.x() = q.getX();
     outputQuat.y() = q.getY();
     outputQuat.z() = q.getZ();
@@ -139,7 +139,7 @@ math::Vector<3>::type toRPY(Eigen::Quaterniond inquat)
 {
   math::Vector<3>::type newRPY;
   btQuaternion q(inquat.x(), inquat.y(), inquat.z(), inquat.w());
-  btMatrix3x3(q).getEulerZYX(newRPY[2], newRPY[1], newRPY[0]);
+  btMatrix3x3(q).getRPY(newRPY[0], newRPY[1], newRPY[2]);
   return newRPY;
 }
 
@@ -202,7 +202,6 @@ public:
       ramp(NULL, SPEED)
   {
   }
-
   template<size_t DOF>
     void
     init(ProductManager& pm);
@@ -307,10 +306,11 @@ template<size_t DOF>
       // Move j3 in order to give room for hand initialization
       jp_type jp_init = wam.getJointPositions();
       jp_init[3] -= 0.35;
+      usleep(500000);
       wam.moveTo(jp_init);
-
+      
+      usleep(500000);
       hand->initialize();
-      hand->update(Hand::S_ALL, true);
       hand->update();
 
       //Publishing the following topics only if there is a BarrettHand present
@@ -335,6 +335,8 @@ template<size_t DOF>
       bhand_joint_state.name = bhand_joints;
       bhand_joint_state.position.resize(7);
     }
+    
+    wam.gravityCompensate(true); // Turning on Gravity Compenstation by Default when starting the WAM Node
 
     //Setting up WAM joint state publisher
     const char* wam_jnts[] = {"wam_j1", "wam_j2", "wam_j3", "wam_j4", "wam_j5", "wam_j6", "wam_j7"};
@@ -364,7 +366,6 @@ template<size_t DOF>
     cart_move_srv = n_.advertiseService("cart_move", &WamNode::cartMove, this); // wam/cart_pos_move
     ortn_move_srv = n_.advertiseService("ortn_move", &WamNode::ortnMove, this); // wam/ortn_move
     
-    std::cout << "Wam Node Active" << std::endl;
 
   }
 
@@ -632,6 +633,7 @@ bool WamNode::handGraspVel(wam_srvs::BHandGraspVel::Request &req, wam_srvs::BHan
 bool WamNode::handSpreadVel(wam_srvs::BHandSpreadVel::Request &req, wam_srvs::BHandSpreadVel::Response &res)
 {
   ROS_INFO("Moving BarrettHand Spread: %.3f m/s", req.velocity);
+  usleep(5000);
   hand->velocityMove(Hand::jv_type(req.velocity), Hand::SPREAD);
   return true;
 }
@@ -702,6 +704,7 @@ template<size_t DOF>
     //publishing sensor_msgs/JointState to bhand/joint_states if present
     if (hand != NULL)
     {
+      hand->update();
       Hand::jp_type hi = hand->getInnerLinkPosition();
       Hand::jp_type ho = hand->getOuterLinkPosition();
       for (size_t i = 0; i < 4; i++)
@@ -833,8 +836,7 @@ template<size_t DOF>
     usleep(250000);
     pm.getSafetyModule()->setMode(SafetyModule::ACTIVE);
     usleep(250000);
-
-    wam.gravityCompensate(true); // Turning on Gravity Compenstation by Default when starting the WAM Node
+    
     ros::init(argc, argv, "wam_node");
     WamNode wam_node;
     wam_node.init<DOF>(pm);
