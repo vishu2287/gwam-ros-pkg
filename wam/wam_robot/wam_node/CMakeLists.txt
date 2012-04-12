@@ -25,7 +25,7 @@ include_directories(/usr/xenomai/include /usr/local/include /usr/local/include/e
 add_definitions(-D_GNU_SOURCE -D_REENTRANT -D__XENO__)
 rosbuild_add_compile_flags(wam_node -Wall -pipe)
 target_link_libraries(wam_node barrett native xenomai pthread rt gsl gslcblas m boost_signals boost_thread)
-#rosbuild_add_boost_directories()
-#rosbuild_link_boost(wam_node thread)
+rosbuild_add_boost_directories()
+rosbuild_link_boost(wam_node thread)
 
 
