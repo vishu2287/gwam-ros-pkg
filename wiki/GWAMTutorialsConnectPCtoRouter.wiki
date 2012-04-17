@@ -34,6 +34,6 @@ Navigate to:
 - LAN 
 At the bottom of the page you have the option to add a new user.  Do this entering your MAC address and the IP address you would like assigned.
 
-Restart the Guardian-WAM
+Restart the Guardian.
 
 You should now be able to access the Guardian-WAM system with a wired connection.
