@@ -7,63 +7,86 @@ The Guardian-WAM software framework is ROS (Robot Operating System).  For more i
 
 There are two primary communication techniques with the Guardian WAM:
 
-=== Local PC Communication === 
+=== External PC Communication === 
 *_The following is the preferred GWAM communication protocol._*
 
 *Install ROS Electric:*
 
-To use the Guardian-WAM in conjunction with a local pc, you must have installed a local copy of ROS Electric.  Installation instructions are available here: [http://www.ros.org/wiki/electric/Installation/Ubuntu ROS Electric Installation].
-
+To use the Guardian-WAM in conjunction with an external pc, you must have installed a local copy of ROS Electric.  Installation instructions are available here: [http://www.ros.org/wiki/electric/Installation/Ubuntu ROS Electric Installation].
 
 *Configure ROS Network Setup:*  (_On your personal computer only!_)
 
 You need to edit your */etc/hosts* file with sudo permissions and add the following lines
 {{{
-192.168.2.100   guardian-wam
+192.168.2.101   guardian-wam
 192.168.2.110   WAM
+}}}
+
+*Test Communication*
+You should now be able to ping & ssh into the different PCs on the Guardian system.
+{{{
+#Ping the Guardian PC
+ping guardian-wam
+#Ping the WAM PC
+ping WAM
+
+#ssh into the Guardian PC
+ssh guardian-wam@guardian-wam
+#password: guardian
+exit 
+
+
+#ssh into the WAM
+ssh robot@WAM
+#password: WAM
+exit 
+}}}
+
+*Create your ROS Workspace*
+The following will create a folder which you can use as your ROS development workspace.  If you already have a working ROS environment workspace, please skip this instruction.
+{{{
+cd ~/
+mkdir ros
 }}}
 
 *Edit your local .bashrc:*
 
-Add the following to your local *~/.bashrc* file with preferred text editor.  This will allow us to create a local environment description file for easy editing.
+The following adds a line to *~/.bashrc* file in order source a local environment description file for easy editing.
 {{{
-source ~/.gwambashrc.ros
+echo "source ~/ros/gwam_env.ros" >> ~/.bashrc
+. ~/.bashrc
 }}}
 
 Now that we have created the link to our local environment file, we must create it in our favorite text editor.
 
-Create the file ~/.gwambashrc.ros and paste in the following
+Create the file ~/ros/gwam_env.ros and paste in the following
 {{{
 source /opt/ros/electric/setup.bash
-alias gwam_sim='export ROBOT=sim; export ROS_MASTER_URI=http://localhost:11311;'
-alias gwam_real='source ~/gwam_real_environment.sh'
-
-#Uncomment and fill in accordingly the point to your ros packages
-#export ROS_PACKAGE_PATH=~/path_to_your_ros_packages:${ROS_PACKAGE_PATH}
-
-#Give the environment a default configuration (either gwam_sim or gwam_real).
-gwam_sim
+export ROS_PACKAGE_PATH=~/ros:${ROS_PACKAGE_PATH}
+export ROS_MASTER_URI=http://guardian-wam:11311;
+#export ROS_MASTER_URI=http://localhost:11311;
 }}}
 
-Now that we have created our local environment file, we must create the automatic script for loading your ip and rosmaster.  Download this shell script with the following commands:
+Explanation:
+We first start by sourcing the default ROS Environment.
 {{{
-cd ~/
-wget http://gwam-ros-pkg.googlecode.com/files/gwam_real_environment.sh
+source /opt/ros/electric/setup.bash
 }}}
-
-In the last script we have exposed two commands to you.  You can now use the command line in any terminal and set up your environment variables very easily.  
-
-In a new terminal you should now be able to give either command:
-
+We then export our ROS_PACKAGE_PATH, this tells the environment where our workspace is located and appends the default ROS_PACKAGE_PATH.
 {{{
-gwam_sim
-## or ##
-gwam_real
+export ROS_PACKAGE_PATH=~/ros:${ROS_PACKAGE_PATH}
+}}}
+The next export is where our system will look for the ROS Master.
+{{{
+export ROS_MASTER_URI=http://guardian-wam:11311
+}}} 
+This means that by default your ROS environment will be set up to look for the guardian-wam PC as the ROS Master.
+
+The following commented piece of code is included for when you do *not* want the ROS Master to run on the Guardian PC (ex. when you want to run a robot simulation).  By uncommenting this and commenting the previous command we are setting our ROS Master to the local PC on which you are setting up.
+{{{
+#export ROS_MASTER_URI=http://localhost:11311
 }}}
 
-These commands will automatically set up your environment to reflect if you would like to use the gwam robot or simulation accordingly.
-
-Please test the commands in a new terminal to verify completeness.
 
 A handy command to view your ROS Environment variables at any time is:
 {{{
@@ -79,7 +102,7 @@ http://www.ros.org/wiki/ROS/NetworkSetup
 
 Another alternative for controlling the Guardian-WAM is using the onboard PC of the Guardian as the working machine.  
 
-Although this is not suggested it is an alternative for those who do not want to install ROS on a local machine.
+Although this is not suggested, it is an alternative for those who do not want to install ROS on a local machine.
 
 This is done by connecting the local PC to a network and accessing the Guardian PC remotely using a secure shell (ssh) client or remote terminal software.
 
@@ -92,7 +115,7 @@ To use this communication approach, you must have access to the Guardian-WAM Rou
 
 You need to edit your */etc/hosts* file with sudo permissions and add the following lines
 {{{
-192.168.2.100   guardian-wam
+192.168.2.101   guardian-wam
 192.168.2.110   WAM
 }}}
 
@@ -106,9 +129,9 @@ ssh guardian-wam@guardian-wam
 Using the secure shell client you now have all the ability to control the Guardian-WAM using ROS.
 
 It is suggested that for any programs you create are located in the
-~/ros workspace that is already configured on the Guardian PC.
+~/Sources workspace that is already configured on the Guardian PC.
 
-If for any reason you need to log into the WAM PC (PC-104):
+To log into the WAM PC (PC-104):
 {{{
 ssh robot@WAM
 #username: robot
@@ -116,7 +139,5 @@ ssh robot@WAM
 }}}
 
 All of the WAM ROS Software is located in the ~/ros workspace.  Please do not edit anything in the ~/ros/electric folder.
-
-
 
 Now that you have finished setting up and communicating with your Guardian-WAM please continue to: [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMROSInstallation gwam-ros-pkg Repository Installation Instructions.]
