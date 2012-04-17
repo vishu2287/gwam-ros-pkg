@@ -80,7 +80,7 @@ The next export is where our system will look for the ROS Master.
 {{{
 export ROS_MASTER_URI=http://guardian-wam:11311
 }}} 
-This means that by default your ROS environment will be set up to look for the guardian-wam PC as the ROS Master.
+This means that by default your ROS environment will have the Guardian PC as the ROS Master.
 
 The following commented piece of code is included for when you do *not* want the ROS Master to run on the Guardian PC (ex. when you want to run a robot simulation).  By uncommenting this and commenting the previous command we are setting our ROS Master to the local PC on which you are setting up.
 {{{
