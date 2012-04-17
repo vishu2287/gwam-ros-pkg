@@ -9,7 +9,7 @@ There is by default no filtering of the Wireless Network.
 To log into the guardian-wam wireless network
 
 ssid: GWAM
-password: BarrettRobotnik
+password: !BarrettRobotnik
 
 # Log into access point #
 
