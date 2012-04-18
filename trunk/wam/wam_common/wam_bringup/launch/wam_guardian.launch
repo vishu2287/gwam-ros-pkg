@@ -1,11 +1,11 @@
 <launch>
 
-  <!-- THIS IS A LAUNCH FILE FOR LAUNCHING THE WAM / BHAND ***ON THE WAM*** -->
+  <!-- THIS IS A LAUNCH FILE FOR LAUNCHING THE WAM / BHAND ***ON THE WAM*** FOR USE WITH THE GUARDIAN-WAM SYSTEM-->
 
   <!-- Adding machine value to be able to launch nodes directly on the WAM internal PC -->
   <include file="$(find wam_bringup)/launch/machines.launch" />
 
   <!--Launching the WAM Node-->
-  <include file="$(find wam_node)/launch/wam_node.launch" />
+  <include file="$(find wam_node)/launch/wam_node_guardian.launch" />
 
 </launch>
