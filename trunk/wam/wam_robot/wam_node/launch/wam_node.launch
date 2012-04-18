@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-  <node machine="wam" name="wam_node" type="wam_node" pkg="wam_node" output="screen" />
-</launch>

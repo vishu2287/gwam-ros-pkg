@@ -119,7 +119,7 @@ protected:
   virtual void operate()
   {
     const math::Vector<3>::type &inputRPY = input.getValue();
-    q.setRPY(inputRPY[0], inputRPY[1], inputRPY[2]);
+    q.setEulerZYX(inputRPY[2], inputRPY[1], inputRPY[0]);
     outputQuat.x() = q.getX();
     outputQuat.y() = q.getY();
     outputQuat.z() = q.getZ();
@@ -139,7 +139,7 @@ math::Vector<3>::type toRPY(Eigen::Quaterniond inquat)
 {
   math::Vector<3>::type newRPY;
   btQuaternion q(inquat.x(), inquat.y(), inquat.z(), inquat.w());
-  btMatrix3x3(q).getRPY(newRPY[0], newRPY[1], newRPY[2]);
+  btMatrix3x3(q).getEulerZYX(newRPY[2], newRPY[1], newRPY[0]);
   return newRPY;
 }
 
