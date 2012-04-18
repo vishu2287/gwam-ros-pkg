@@ -14,10 +14,11 @@
   <depend package="geometry_msgs"/>
   <depend package="roscpp"/>
   <depend package="actionlib"/>
+  <depend package="tf"/>
+  <depend package="bullet"/>
   <depend package="libbarrett_ros"/>
   <depend package="wam_msgs"/>
   <depend package="wam_srvs"/>
-  <depend package="tf"/>
 </package>
 
 
