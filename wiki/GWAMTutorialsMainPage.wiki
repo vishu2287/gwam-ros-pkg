@@ -37,4 +37,6 @@ For instructions on how to configure your PC to communicate with the Guardian-WA
 
 [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsWAMServiceCntrl Controlling the WAM with Service Calls.]
 
+[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsBHANDCntrl Controlling the BarrettHand.]
+
 [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsWAMRTCntrl Controlling the WAM arm in Real-Time.]
