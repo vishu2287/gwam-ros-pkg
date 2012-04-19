@@ -1,5 +1,0 @@
-#summary A tutorial describing how to start the Guardian-WAM.
-
-= Starting the Guardian-WAM Robot =
-
-This tutorial describes how to start the Guardian-WAM system for the actual robot.
