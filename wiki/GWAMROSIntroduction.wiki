@@ -24,18 +24,16 @@ _ROS Software Maintainers: [http://www.barrett.com Barrett Technology] & [http:/
 
 *[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMROSSoftwareOverview gwam-ros-pkg Software Overview]*
 
-
-= Running = 
-==  Simulation == 
-Link to Wiki page
-== Robot ==
-Link to Wiki page
-
 = Tutorials = 
 *[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsMainPage Guardian-WAM Tutorials]*
 
 = Support =
-Link to support Page (support.barrett.com?)
+*[http://support.barrett.com/wiki/GuardianWAM Barrett Technology Guardian-WAM Support Page]*
+
+*For Continued Customer Support Questions Email - support@barrett.com*
 
 = Related / Continued Resources =
-Link to relevant individual documentation.
+
+*[http://answers.ros.org answers.ros.org]* (Quick response times from the ROS community for any type of ROS related question).
+
+*[http://www.ros.org ros.org]* (Searching ros.org will return descriptions and tutorials for the majority of ROS packages).
