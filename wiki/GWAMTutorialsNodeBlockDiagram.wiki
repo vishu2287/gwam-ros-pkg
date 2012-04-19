@@ -1,0 +1,11 @@
+#summary Tutorial Describing the Guardian-WAM Block Diagrams
+
+= Guardian-WAM Tutorial: Guardian-WAM Hardware / Software Schematics=
+
+*The following tutorial describes the hardware and software schematics for the Guardian-WAM System.*
+
+== Guardian-WAM Schematics ==
+
+Guardian-WAM Hardware and Communication Schematic
+
+http://i.imgur.com/qcvfk.png?1
