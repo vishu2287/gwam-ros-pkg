@@ -18,7 +18,7 @@ http://i.imgur.com/stMGi.png
 
 The above image describes the ROS nodes that make up the default Guardian-WAM ROS software launched.  Upon starting the Guardian system a ROS Master is started on the Guardian PC.  A script is launched on startup that initializes all of the above nodes described in blue.  These nodes all exist and are controlled on the Guardian PC.  The yellow wam_node denotes the node that needs to be launched on the WAM robot.  This node will initialize the WAM robot exposing all of the rostopics and services produced by the WAM.
 
-For instructions on launching the wam_node on the WAM please see the previous tutorial:
+For instructions on launching the wam_node on the WAM robot please see the previous tutorial:
 
 [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsGWAMQuickStart Guardian-WAM Quick Start Guide Tutorial]
 
