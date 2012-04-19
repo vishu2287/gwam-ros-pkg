@@ -39,4 +39,79 @@ rosnode list
 
 Most of these nodes should look familiar as they describe components of the Guardian-WAM system.
 
-Future ROS nodes that a user may write will be displayed with the above command.
+Future ROS nodes that a user may write will also be displayed with the above command.
+
+The most important nodes of the guardian-ros-pkg are the wam_node and guardian_node.  The wam_node abstracts all the functionality of the WAM and !BarrettHand, while the guardian_node exposes control of the Guardian mobile base.
+
+These nodes are described in great detail in the software overviews:
+
+[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackagewam_node wam_node] & [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMPackageguardian_node guardian_node]
+
+Another interesting tool for visualization of our ROS Graph is rxgraph.  
+
+To view the current ROS Computation Graph in a terminal type:
+{{{
+rxgraph
+}}}
+
+This visualization will show the inter-connectivity of the various processing on the ROS Graph.  By clicking on individual nodes you can view the topics and services that node is publishing and subscribing to.
+
+For more information of ROS Nodes and rxgraph please visit the following:
+
+[http://www.ros.org/wiki/Nodes ROS Nodes]
+
+[http://www.ros.org/wiki/rxgraph rxgraph]
+
+== Guardian-WAM Topics ==
+
+ROS Topics are buses over which data structures known as [http://www.ros.org/wiki/Messages messages] are passed.  ROS Topics use publish/subscriber methods and separate the publishing of messages from their consumption.  Topics published and subscribed to on the Guardian-WAM system follow typical ROS symantics for areas such as commanding linear and angular velocity to the Guardian, and publishing of joint angles, effort and velocities of the WAM.  
+
+To viewall of the rostopics on the ROS Graph in a terminal:
+{{{
+rostopic list
+}}} 
+
+You will see a large number of topics available for control of the robot.  
+
+A useful tool to see which nodes are publishing and subscribing to a topic:
+
+{{{
+rostopic info [name of topic ex. wam/joint_states]
+}}}
+
+Some of the topics published and subscribed to by the Guardian-WAM are:
+
+wam/joint_states - Publishes the current joint angles, effort, and velocity of all the WAM joints.
+
+wam/cart_vel_cmd - The WAM subscribes to real-time cartesian velocity commands.
+
+guardian/command - The Guardian subscribes to linear and angular velocity commands.
+
+== Guardian-WAM Services ==
+
+ROS Services follow the Remote Procedure Call (RPC) for Request/Reply communication between nodes.  Services on the Guardian-WAM expose a large amount of its functionality.  
+
+To view all of the rosservices on the ROS Graph in a terminal:
+{{{
+rosservice list
+}}}
+
+You will see a large list of services available for control of the robot.  Some of these include:
+
+wam/joint_move - for WAM Joint moves using trapezoidal motion control
+
+wam/cart_move -  for WAM Cartesian moves using trapezoidal motion control
+
+also exposed is all of the functionality for the !BarrettHand, a few are:
+
+bhand/open_grasp - for opening the !BarrettHand
+
+bhand/close_spread -  for closing the !BarrettHand spread
+
+bhand/grasp_pos - for moving the !BarrettHand grasp to a specified position
+
+and many, many more..
+
+For more information on ROS Services please visit: [http://www.ros.org/wiki/Services ROS Services]
+
+The next tutorial will show us how to control the WAM using the services shown using the command line: *[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsWAMServiceCntrl Controlling the WAM with Service Calls.]*
