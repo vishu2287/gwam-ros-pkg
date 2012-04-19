@@ -1,0 +1,8 @@
+#summary Tutorial Describing the Quick Start Manual and Procedure.
+
+= Guardian-WAM Tutorial: Quick-Start Guide=
+
+*The following tutorial describes a quick start guide for basic operation of the Guardian-WAM system with Bluetooth Joystick Teleoperation.*
+
+== Guardian-WAM Quick-Start ==
+Please download and follow the [http://web.barrett.com/support/GuardianWAM_Documentation/Guardian_WAM_QuickStartGuide.pdf Guardian-WAM Quick Start Guide.]
