@@ -23,7 +23,7 @@ For instructions on how to configure your PC to communicate with the Guardian-WA
 
 *_Understanding and Using the Guardian-WAM_*
 
-[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsNodeBlockDiagram Guardian-WAM Software Block Diagram.]
+[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsNodeBlockDiagram Guardian-WAM Hardware/Software Schematics.]
 
 [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsUnderstandingGWAMNodes Understanding Guardian-WAM ROS Nodes/Topics/Services.]
 
