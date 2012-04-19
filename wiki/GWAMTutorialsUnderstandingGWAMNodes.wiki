@@ -2,11 +2,11 @@
 
 = Guardian-WAM Tutorial: Understanding the Guardian-WAM Nodes/Services/Topics=
 
-*The following tutorial will help us better understand the Guardian-WAM Nodes, Services, and Topics on the ROS Graph.*
+*The following tutorial will help in better understanding the Guardian-WAM Nodes, Services, and Topics on the ROS Graph.*
 
 *Please bring up the entire Guardian-WAM System before continuing with this tutorial*
 
- - Turn on the Guardian & WAM power, starting the Guardian PC, and resetting the power to the motor controller.
+ - Turn on the Guardian-WAM Master Power, WAM power, start the Guardian PC, and reset the power to the motor controller.
 
  - Once the Guardian system is online, please SSH into the WAM PC and launch the wam_node
 
@@ -21,7 +21,7 @@ Your system should now be initialized and running, please continue with the tuto
 
 == Guardian-WAM Nodes ==
 
-ROS Nodes are the processes that perform computation.  As seen in the previous [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsNodeBlockDiagram tutorial] a number of nodes are launched on the Guardian-WAM Startup.  We also start the wam_node on ROS graph by logging into the WAM and launching it.  
+ROS Nodes are the processes that perform computation.  As seen in the previous [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsNodeBlockDiagram tutorial] a number of nodes are launched on the Guardian-WAM Startup.  We also start the wam_node on the ROS graph by logging into the WAM and launching it.  
 
 To view all of the active guardian-wam nodes:
 {{{
@@ -54,26 +54,23 @@ To view the current ROS Computation Graph in a terminal type:
 rxgraph
 }}}
 
-This visualization will show the inter-connectivity of the various processing on the ROS Graph.  By clicking on individual nodes you can view the topics and services that node is publishing and subscribing to.
+This visualization will show the inter-connectivity of the various processes on the ROS Graph.  By clicking on individual nodes you can view the topics and services that node is publishing and subscribing to.
 
 For more information of ROS Nodes and rxgraph please visit the following:
-
-[http://www.ros.org/wiki/Nodes ROS Nodes]
-
-[http://www.ros.org/wiki/rxgraph rxgraph]
+[http://www.ros.org/wiki/Nodes ROS Nodes] , [http://www.ros.org/wiki/rxgraph rxgraph] & [http://www.ros.org/wiki/ROS/Tutorials/UnderstandingNodes ROS Nodes Tutorial]
 
 == Guardian-WAM Topics ==
 
 ROS Topics are buses over which data structures known as [http://www.ros.org/wiki/Messages messages] are passed.  ROS Topics use publish/subscriber methods and separate the publishing of messages from their consumption.  Topics published and subscribed to on the Guardian-WAM system follow typical ROS symantics for areas such as commanding linear and angular velocity to the Guardian, and publishing of joint angles, effort and velocities of the WAM.  
 
-To viewall of the rostopics on the ROS Graph in a terminal:
+To view all of the rostopics on the ROS Graph in a terminal:
 {{{
 rostopic list
 }}} 
 
 You will see a large number of topics available for control of the robot.  
 
-A useful tool to see which nodes are publishing and subscribing to a topic:
+A useful tool to see which nodes are publishing and subscribing to a topic as well as what data type is being passed:
 
 {{{
 rostopic info [name of topic ex. wam/joint_states]
@@ -87,9 +84,21 @@ wam/cart_vel_cmd - The WAM subscribes to real-time cartesian velocity commands.
 
 guardian/command - The Guardian subscribes to linear and angular velocity commands.
 
+To subscribe to a topic and print its values via the command line:
+
+{{{
+rostopic echo [name of topic ex. wam/joint_states]
+}}}
+
+This example will stream the current joint angles/effort/velocity of the WAM.
+
+For more information on ROS Topics please visit:
+[http://www.ros.org/wiki/Topics ROS Topics] & [http://www.ros.org/wiki/ROS/Tutorials/UnderstandingTopics ROS Topics Tutorial]
+
+
 == Guardian-WAM Services ==
 
-ROS Services follow the Remote Procedure Call (RPC) for Request/Reply communication between nodes.  Services on the Guardian-WAM expose a large amount of its functionality.  
+ROS Services use a Remote Procedure Call (RPC) for Request/Reply communication between nodes.  Services on the Guardian-WAM system expose a large amount of its functionality.  
 
 To view all of the rosservices on the ROS Graph in a terminal:
 {{{
@@ -112,6 +121,6 @@ bhand/grasp_pos - for moving the !BarrettHand grasp to a specified position
 
 and many, many more..
 
-For more information on ROS Services please visit: [http://www.ros.org/wiki/Services ROS Services]
+For more information on ROS Services please visit: [http://www.ros.org/wiki/Services ROS Services] & [http://www.ros.org/wiki/ROS/Tutorials/UnderstandingServicesParams ROS Services Tutorial]
 
 The next tutorial will show us how to control the WAM using the services shown using the command line: *[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsWAMServiceCntrl Controlling the WAM with Service Calls.]*
