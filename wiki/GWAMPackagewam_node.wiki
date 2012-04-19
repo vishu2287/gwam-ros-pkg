@@ -19,7 +19,7 @@ The wam_node package is self aware of robot configuration.  This means that if y
 
 *Starting the wam_node*
 {{{
-roslaunch wam_bringup wam_real.launch
+roslaunch wam_bringup wam_guardian.launch
 }}}
 
 == __Interaction with the WAM / !BarrettHand__ == 
