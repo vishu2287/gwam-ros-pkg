@@ -34,6 +34,8 @@ _ROS Software Maintainers: [http://www.barrett.com Barrett Technology] & [http:/
 
 = Related / Continued Resources =
 
+*[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMROSUpdate Updating to the latest code release]*
+
 *[http://answers.ros.org answers.ros.org]* (Quick response times from the ROS community for any type of ROS related question).
 
 *[http://www.ros.org ros.org]* (Searching ros.org will return descriptions and tutorials for the majority of ROS packages).
