@@ -8,7 +8,18 @@ Before starting to use the Guardian-WAM we strongly suggest that you have a thor
 
 Please complete the [http://www.ros.org/wiki/ROS/Tutorials ROS Introductory Tutorials].
 
-=== Real Robot Specific Tutorials ===
+=== Tutorials ===
+
+*The following tutorials assume that you have installed ROS and configured your PC to function with the Guardian-WAM System* 
+
+For instructions on how to configure your PC to communicate with the Guardian-WAM system please visit:
+
+[http://code.google.com/p/gwam-ros-pkg/wiki/InitialSetupInstructionsOffboardPC External User PC Configuration Instructions]
+
+*_Starting the Guardian-WAM System*
+
+[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsGWAMQuickStart Guardian-WAM Quick-Start Guide]
+
 
 *_WAM Specific Tutorials_*
 
@@ -19,6 +30,5 @@ Please complete the [http://www.ros.org/wiki/ROS/Tutorials ROS Introductory Tuto
 *_Guardian-WAM Specific Tutorials_*
 
 [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsStartupGWAM Guardian-WAM Start Up]
-
 
 [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsWAMJoystickTeleop Writing a WAM Joystick Teleoperation Node]
