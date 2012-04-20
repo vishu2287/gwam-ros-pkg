@@ -588,8 +588,8 @@ bool WamNode::handCloseSpread(std_srvs::Empty::Request &req, std_srvs::Empty::Re
 //Function to control a BarrettHand Finger Position
 bool WamNode::handFingerPos(wam_srvs::BHandFingerPos::Request &req, wam_srvs::BHandFingerPos::Response &res)
 {
-  ROS_INFO("Moving BarrettHand Finger %d: %.3f radians", req.finger, req.radians);
-  hand->trapezoidalMove(Hand::jp_type(req.radians), req.finger, false);
+  ROS_INFO("Moving BarrettHand to Finger Positions: %.3f, %.3f, %.3f radians", req.radians[0], req.radians[1],req.radians[2]);
+  hand->trapezoidalMove(Hand::jp_type(req.radians[0],req.radians[1],req.radians[2],0.0),Hand::GRASP, false);
   return true;
 }
 
@@ -612,8 +612,8 @@ bool WamNode::handSpreadPos(wam_srvs::BHandSpreadPos::Request &req, wam_srvs::BH
 //Function to control a BarrettHand Finger Velocity
 bool WamNode::handFingerVel(wam_srvs::BHandFingerVel::Request &req, wam_srvs::BHandFingerVel::Response &res)
 {
-  ROS_INFO("Moving BarrettHand Finger %d: %.3f m/s", req.finger, req.velocity);
-  hand->velocityMove(Hand::jv_type(req.velocity), req.finger);
+  ROS_INFO("Moving BarrettHand Finger Velocities: %.3f, %.3f, %.3f m/s", req.velocity[0], req.velocity[1], req.velocity[2]);
+  hand->velocityMove(Hand::jv_type(req.velocity[0],req.velocity[1],req.velocity[2],0.0), Hand::GRASP);
   return true;
 }
 
