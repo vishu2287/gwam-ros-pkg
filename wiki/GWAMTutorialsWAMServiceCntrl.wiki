@@ -63,7 +63,7 @@ You should now be able to move the WAM around in free space, note that gravity c
 At any point with the WAM you can make the wam hold its current joint position with the command.
 {{{
 rosservice call /wam/hold_joint_pos true
-## Ensuing
+## We can also shut off the joint hold using
 rosservice call /wam/hold_joint_pos false
 }}}
 
