@@ -31,7 +31,7 @@ export ROS_MASTER_URI = http://guardian-wam:11311
 #or edit your ROS Environment file (usually ~/ros/gwam_env.ros) to point to the guardian-wam pc
 }}}
 
-View all of the ROS Services available that correspond to controlling thw WAM.
+View all of the ROS Services available that correspond to controlling the WAM.
 {{{
 #The following will show all of the rosservices available
 rosservice list
