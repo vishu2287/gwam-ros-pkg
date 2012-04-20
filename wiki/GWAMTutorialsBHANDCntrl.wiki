@@ -126,4 +126,4 @@ rosservice call /bhand/finger_vel [0.5,0.0,0.0]
 rosservice call /bhand/finger_vel [-0.5,0.0,0.0]
 }}}
 
-Now that you have a full understanding of the WAM and !BarrettHand ROS Services, we can learn how to write a program for robot control using these services in the next tutorial: [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsFirstGWAMProgram Writing Your First Guardian-WAM Control Program]
+Now that you have a full understanding of the WAM and !BarrettHand ROS Services, we can learn how to write a program for robot control using these services in the next tutorial: *[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsFirstGWAMProgram Writing Your First Guardian-WAM Control Program]*
