@@ -1,3 +1,2 @@
-int8    finger
-float32 radians 
+float32[3] radians 
 ---
