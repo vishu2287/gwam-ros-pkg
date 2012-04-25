@@ -11,9 +11,9 @@ This Package contains WAM specific message definitions.
 
 = ROS Message Types =
 
-*RTJointPos* - Type: float32{{{[]}}} joints
+*RTJointPos* - Type: float32{{{[]}}} joints, float32{{{[]}}} rate_limits
 
-*RTJointVel* - Type: float32 direction, float32 magnitude 
+*RTJointVel* - Type: float32{{{[]}}} velocities 
 
 *RTCartPos* - Type: float32{{{[3]}}} position
 
