@@ -36,7 +36,7 @@ bhand/joint_states - Publishes the current angle in radians for each joint of th
 
 (TBD) wam/joint_pos_cmd _- type wam_msgs/RTJointPos_
 
-(TBD) wam/joint_vel_cmd _- type wam_msgs/RTJointVel_
+wam/joint_vel_cmd _- type wam_msgs/RTJointVel_
 
 (TBD)wam/cart_pos_cmd _- type wam_msgs/RTCartPos_
 
