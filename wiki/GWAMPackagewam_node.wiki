@@ -34,9 +34,9 @@ bhand/joint_states - Publishes the current angle in radians for each joint of th
 
 === The WAM Node Subscribes to the following topics - primarily for RT Control (up to 500Hz) ===
 
-(TBD) wam/joint_pos_cmd _- type wam_msgs/RTJointPos_
+(TBD) wam/jnt_pos_cmd _- type wam_msgs/RTJointPos_
 
-wam/joint_vel_cmd _- type wam_msgs/RTJointVel_
+wam/jnt_vel_cmd _- type wam_msgs/RTJointVel_
 
 (TBD)wam/cart_pos_cmd _- type wam_msgs/RTCartPos_
 
