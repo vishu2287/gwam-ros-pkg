@@ -32,19 +32,21 @@ wam/pose - Publishes the current pose (cartesian position and orientation).
 
 bhand/joint_states - Publishes the current angle in radians for each joint of the !BarrettHand.
 
-=== The WAM Node Subscribes to the following topics - primarily for RT Control (up to 500Hz) ===
+=== The WAM Node Subscribes to the following topics - primarily for RT Control ===
 
-(TBD) wam/jnt_pos_cmd _- type wam_msgs/RTJointPos_
+wam/jnt_pos_cmd _- type wam_msgs/RTJointPos_
 
 wam/jnt_vel_cmd _- type wam_msgs/RTJointVel_
 
-(TBD)wam/cart_pos_cmd _- type wam_msgs/RTCartPos_
+wam/cart_pos_cmd _- type wam_msgs/RTCartPos_
 
 wam/cart_vel_cmd _- type wam_msgs/RTCartVel_
 
-(TBD)wam/ortn_pos_cmd _- type wam_msgs/RTOrtnPos_
+wam/ortn_pos_cmd _- type wam_msgs/RTOrtnPos_
 
 wam/ortn_vel_cmd _- type wam_msgs/RTOrtnVel_  
+
+wam/pose_cmd _- type wam_msgs/RTPose_
 
 
 === The WAM Node offers the following Service Calls ===
