@@ -42,11 +42,11 @@ wam/cart_pos_cmd _- type wam_msgs/RTCartPos_
 
 wam/cart_vel_cmd _- type wam_msgs/RTCartVel_
 
-wam/ortn_pos_cmd _- type wam_msgs/RTOrtnPos_
+(TBD)wam/ortn_pos_cmd _- type wam_msgs/RTOrtnPos_
 
 wam/ortn_vel_cmd _- type wam_msgs/RTOrtnVel_  
 
-wam/pose_cmd _- type wam_msgs/RTPose_
+(TBD)wam/pose_cmd _- type wam_msgs/RTPose_
 
 
 === The WAM Node offers the following Service Calls ===
