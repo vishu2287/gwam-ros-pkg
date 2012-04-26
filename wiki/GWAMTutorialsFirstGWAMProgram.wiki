@@ -1,0 +1,57 @@
+#summary Writing a program to control the Guardian-WAM
+
+= Guardian-WAM Tutorial: Writing a Guardian-WAM Control Program =
+
+*Now that we have a understanding of controlling the WAM and BarrettHand with ROS Service calls from the previous two tutorials:*
+
+[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsWAMServiceCntrl Controlling the WAM with Service Calls]
+
+[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsBHANDCntrl Controlling the BarrettHand with Service Calls]
+
+*We will use that knowledge and understanding to create our own standalone Guardian-WAM control program.*
+
+This portion of the tutorial _*does not*_ require the Guardian-WAM to be on and running.  
+
+== Instructions ==
+
+On a user PC, with a network connection to the Guardian-WAM.
+
+Enter into our user created path for ROS Packages:
+{{{
+cd ~/ros
+}}}
+
+You can verify that your ~/ros folder is in the ROS Package Path with
+{{{
+env | grep ROS_PACKAGE_PATH
+}}}
+You should see ~/ros somewhere in the path if this is your working ROS directory
+
+In your ros directory (~/ros) workspace.
+
+Create a new ROS package
+{{{
+roscreate-pkg gwam_tutorials
+
+#Enter your new ROS Package
+cd gwam_tutorials
+
+#Make a folder for the source code we will write
+mkdir src
+
+#Create the c++ file that we will write to control the Guardian-WAM
+#For this we will use Gedit
+gedit gwam_control_tutorial.cpp
+}}}
+
+Copy and Paste the following source code into gwam_control_tutorial.cpp
+{{{
+#include <ros/ros.h>
+
+
+}}}
+
+
+}}}
+
+ 
