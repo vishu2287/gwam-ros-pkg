@@ -240,7 +240,7 @@ On your local machine where you created your Guardian-WAM Control Program:
 roscd gwam_tutorials
 
 #Start your program with the following command
-rosrun gwam_tutorials gwam_control_tutorails
+rosrun gwam_tutorials gwam_control_tutorials
 }}}
 
 Congratulations you have just written your first Guardian-WAM Control Program!
