@@ -172,8 +172,6 @@ Save and close the file.
  
 Now that we have created our file and understand how to make service calls from our own control program.  We will learn how to compile and run the program.
 
-Running this code _*REQUIRES*_ a 7-DOF WAM and !BarrettHand 
-
 Edit the manifest.xml in order for our program to retrieve the necessary dependencies.
 
 Please make your manifest.xml replicate the file below
@@ -217,3 +215,34 @@ We are now ready to compile our program
 {{{
 rosmake
 }}}
+
+
+=== Running Your Program on the Guardian-WAM ===
+Running this code _*REQUIRES*_ a 7-DOF WAM and !BarrettHand 
+
+*Please bring up the entire Guardian-WAM System before continuing with this tutorial*
+
+ - Turn on the Guardian-WAM Master Power, WAM power, start the Guardian PC, and reset the power to the motor controller.
+
+ - Once the Guardian system is online, please SSH into the WAM PC and launch the wam_node
+
+{{{
+ssh robot@WAM
+#password: WAM
+
+roslaunch wam_bringup wam_guardian.launch
+}}}
+
+Your system should now be initialized and running, please continue with the tutorial.
+
+On your local machine where you created your Guardian-WAM Control Program:
+{{{
+roscd gwam_tutorials
+
+#Start your program with the following command
+rosrun gwam_tutorials gwam_control_tutorails
+}}}
+
+Congratulations you have just written your first Guardian-WAM Control Program!
+
+Now that we have a full understanding how to create our own Guardian-wAM control program lets take a look at a more complicated example of this:  [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsGWAMJoystickTeleop Understanding the Guardian-WAM Joystick Teleoperation]
