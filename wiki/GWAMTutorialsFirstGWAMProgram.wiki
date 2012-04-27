@@ -12,6 +12,8 @@
 
 This portion of the tutorial _*does not*_ require the Guardian-WAM to be on and running.  
 
+Running this code _*REQUIRES*_ a 7-DOF WAM and !BarrettHand 
+
 == Instructions ==
 
 On a user PC, with a network connection to the Guardian-WAM.
@@ -48,10 +50,21 @@ Copy and Paste the following source code into gwam_control_tutorial.cpp
 {{{
 #include <ros/ros.h>
 
+#include "wam_srvs/BHandFingerVel.h"
+#include "wam_srvs/BHandSpreadPos.h"
+#include "wam_srvs/JointMove.h"
+#include "std_srvs/Empty.h"
+#include "geometry_msgs/Twist.h"
+
+int main(int argc, char** argv)
+{
+  ros::init(argc, argv, "gwam_tutorial_node");
+
+  
+  
+  return 0;
+}
+
 
 }}}
-
-
-}}}
-
  
