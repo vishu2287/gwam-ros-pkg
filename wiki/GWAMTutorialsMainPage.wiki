@@ -34,9 +34,3 @@ For instructions on how to configure your PC to communicate with the Guardian-WA
 [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsFirstGWAMProgram Writing your first Guardian-WAM control program.]
 
 [http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsGWAMJoystickTeleop Understanding the Guardian-WAM Joystick Teleoperation.]
-
-[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsRviz Using rviz 3D visualization environment with the Guardian-WAM.]
-
-[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsStandaloneOperation Using the Guardian or WAM robot without the other.]
-
-[http://code.google.com/p/gwam-ros-pkg/wiki/GWAMTutorialsWAMRTCntrl Controlling the WAM arm in Real-Time.]
