@@ -125,6 +125,8 @@ int main(int argc, char** argv)
 
   // Initialize our publisher to publish on the guardian_node/command topic
   ros::Publisher guardian_move_pub = n.advertise<geometry_msgs::Twist>("guardian_node/command",1);
+  ros::Duration(2.0).sleep();
+ 
 
   // Declare our guardian message
   geometry_msgs::Twist guardian_msg;
@@ -162,7 +164,7 @@ int main(int argc, char** argv)
 
   ros::Duration(1.0).sleep(); // The guardian stop and give the program one second before continuing 
   
-  return 0; // Exit our program with success
+  return 0;
 }
 }}}
 Save and close the file.
