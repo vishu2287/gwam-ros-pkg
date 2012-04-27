@@ -51,7 +51,6 @@ Copy and Paste the following source code into gwam_control_tutorial.cpp
 #include <ros/ros.h>
 
 #include "wam_srvs/BHandFingerVel.h"
-#include "wam_srvs/BHandSpreadPos.h"
 #include "wam_srvs/JointMove.h"
 #include "std_srvs/Empty.h"
 #include "geometry_msgs/Twist.h"
@@ -59,12 +58,74 @@ Copy and Paste the following source code into gwam_control_tutorial.cpp
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "gwam_tutorial_node");
+  ros::NodeHandle n;
+
+  /* WAM Control Portion */
+  ros::ServiceClient bhand_sc_clnt = n.serviceClien<std_srvs::Empty>("bhand/close_spread");
+  ros::ServiceClient bhand_fvel_clnt = n.serviceClient<wam_srvs::BHandFingerVel>("bhand/finger_vel");
+  ros::ServiceClient wam_jmove_clnt = n.serviceClient<wam_srvs::JointMove>("wam/joint_move");
+  ros::ServiceClient wam_home_clnt = n.serviceClient<std_srvs::Empty>("wam/go_home");
+
+  std_srvs::Empty close_sprd;
+  std_srvs::Empty go_home;  
+  wam_srvs::BHandFingerVel fvel_srv;
+  wam_srvs::JointMove jmove_srv;
 
   
+  bhand_sc_clnt.call(close_sprd);
+
+  ros::Duration(3.0).sleep(); // The BarrettHand will close the spread and wait for 3 seconds
+
+  fvel_srv.request.velocity = [0.25,0.5,1.0]
+  bhand_fvel_clnt.call(svel_srv);
+  
+  ros::Duration(3.0).sleep(); // The BarrettHand will move the fingers at the velocity specified and wait 3 seconds
+
+  jmove_srv.request.joints = [0,0,0,-1.57,0,0,0];
+  wam_jmove_clnt.call(jmove_srv);
+
+  ros::Duration(3.0).sleep(); // The WAM will move to the commanded joint position and wait for 3 seconds
+  
+  wam_home_clnd.call(go_home);
+
+  ros::Duration(3.0).sleep(); // The WAM will go to its zeroed joint positions in order to avoid collisions with the WAM and gently set itself back home
+
+  /* Guardian Base Control Portion */  
+
+  ros::Publisher guardian_move_pub = n.advertise<geometry_msgs::Twist>("guardian_node/command",1);
+
+  geometry_msgs::Twist guardian_msg;
+  
+  guardian_msg.linear.x() = 0.0;
+  guardian_msg.linear.y() = 0.0;
+  guardian_msg.linear.z() = 0.0;
+
+  guardian_msg.angular.x() = 0.1;
+  guardian_msg.angular.y() = 0.1;
+  guardian_msg.angular.z() = 0.1;
+  
+  guardian_move_pub.publish(guardian_msg);
+
+  ros::Duration(2.0).sleep(); // The guardian will rotate for two seconds
+
+  guardian_msg.angular.x() = -0.1;
+  guardian_msg.angular.y() = -0.1;
+  guardian_msg.angular.z() = -0.1;
+
+  guardian_move_pub.publish(guardian_msg);
+
+  ros::Duration(2.0).sleep(); // The guardian will rotate the opposite direction for two seconds
+  
+  guardian_msg.angular.x() = 0.0;
+  guardian_msg.angular.y() = 0.0;
+  guardian_msg.angular.z() = 0.0;
+  
+  guardian_move_pub.publish(guardian_msg);
+
+  ros::Duration(1.0).sleep(); // The guardian stop and give the program one second before continuing 
   
   return 0;
 }
-
 
 }}}
  
