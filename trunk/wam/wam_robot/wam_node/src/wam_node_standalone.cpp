@@ -163,14 +163,12 @@ template<size_t DOF>
     systems::ExposedOutput<math::Vector<3>::type> rpy_cmd, current_rpy_ortn;
     systems::ExposedOutput<jv_type> jv_track;
     systems::ExposedOutput<jp_type> jp_track;
-    systems::ExposedOutput<Eigen::Quaterniond> op_track;
     systems::TupleGrouper<cp_type, Eigen::Quaterniond> rt_pose_cmd;
     systems::Summer<cp_type> cart_pos_sum;
     systems::Summer<math::Vector<3>::type> ortn_cmd_sum;
     systems::Ramp ramp;
     systems::RateLimiter<jp_type> jp_rl;
     systems::RateLimiter<cp_type> cp_rl;
-    systems::RateLimiter<Eigen::Quaterniond> op_rl;
     Multiplier<double, cp_type, cp_type> mult_linear;
     Multiplier<double, math::Vector<3>::type, math::Vector<3>::type> mult_angular;
     ToQuaternion to_quat, to_quat_print;
@@ -268,8 +266,6 @@ template<size_t DOF>
     void
     cartPosCB(const wam_msgs::RTCartPos::ConstPtr& msg);
     void
-    ortnPosCB(const wam_msgs::RTOrtnPos::ConstPtr& msg);
-    void
     publish(ProductManager& pm);
     void
     updateRT(ProductManager& pm);
@@ -352,7 +348,6 @@ template<size_t DOF>
     jnt_vel_sub = n_.subscribe("jnt_vel_cmd", 1, &WamNode::jntVelCB, this); // wam/jnt_vel_cmd
     jnt_pos_sub = n_.subscribe("jnt_pos_cmd", 1, &WamNode::jntPosCB, this); // wam/jnt_pos_cmd
     cart_pos_sub = n_.subscribe("cart_pos_cmd", 1, &WamNode::cartPosCB, this); // wam/cart_pos_cmd
-    ortn_pos_sub = n_.subscribe("ortn_pos_cmd", 1, &WamNode::ortnPosCB, this); // wam/ortn_pos_cmd
 
     //Advertising the following rosservices
     gravity_srv = n_.advertiseService("gravity_comp", &WamNode::gravity, this); // wam/gravity_comp
@@ -681,25 +676,6 @@ template<size_t DOF>
     last_cart_pos_msg_time = ros::Time::now();
   }
 
-//Callback function for RT Orientaiton Position Messages
-template<size_t DOF>
-  void WamNode<DOF>::ortnPosCB(const wam_msgs::RTOrtnPos::ConstPtr& msg)
-  {
-    if (ortn_pos_status)
-    {
-      rt_op_cmd.x() = msg->orientation[0];
-      rt_op_cmd.y() = msg->orientation[1];
-      rt_op_cmd.z() = msg->orientation[2];
-      rt_op_cmd.w() = msg->orientation[3];
-      rt_op_rl.x() = msg->rate_limits[0];
-      rt_op_rl.y() = msg->rate_limits[1];
-      rt_op_rl.z() = msg->rate_limits[2];
-      rt_op_rl.w() = msg->rate_limits[3];
-      new_rt_cmd = true;
-    }
-    last_ortn_pos_msg_time = ros::Time::now();
-  }
-
 //Function to update the publisher
 template<size_t DOF>
   void WamNode<DOF>::publish(ProductManager& pm)
@@ -882,35 +858,11 @@ template<size_t DOF>
       new_rt_cmd = false;
     }
 
-    //Real-Time Orientation Position Control Portion
-    else if (last_ortn_pos_msg_time + rt_msg_timeout > ros::Time::now()) // checking if a cartesian position message has been published and if it is within timeout
-    {
-      if (!ortn_pos_status)
-      {
-        current_cart_pos.setValue(wam.getToolPosition()); // Setting the current cartesian position to keep
-        op_track.setValue(wam.getToolOrientation()); // Initializing the orientation
-        op_rl.setLimit(rt_op_rl); // Setting the rate limit to subscribed rate limit for orientation
-        systems::forceConnect(op_track.output, op_rl.input); // connecting the commanded orientation position to the rate limiter
-        systems::forceConnect(current_cart_pos.output, rt_pose_cmd.getInput<0> ()); // saving the rate limited cartesian position command to the pose.position
-        systems::forceConnect(op_rl.output, rt_pose_cmd.getInput<1> ());// saving the original orientation to the pose.orientation
-        wam.trackReferenceSignal(rt_pose_cmd.output); // Commanding the WAM to track the pose signal in real-time
-      }
-      else if (new_rt_cmd)
-      {
-        BARRETT_SCOPED_LOCK(pm.getMutex());//Forces us into real-time
-        op_track.setValue(rt_op_cmd); // Set our orientation positions (Quaternion) to subscribed command
-        op_rl.setLimit(rt_op_rl); // Updating the rate limit to subscribed rate to control the rate of the moves
-      }
-      ortn_pos_status = true;
-      new_rt_cmd = false;
-    }
-
     //If we fall out of 'Real-Time', hold joint positions
-    else if (cart_vel_status | ortn_vel_status | jnt_vel_status | jnt_pos_status | cart_pos_status | ortn_pos_status)
+    else if (cart_vel_status | ortn_vel_status | jnt_vel_status | jnt_pos_status | cart_pos_status)
     {
       wam.moveTo(wam.getJointPositions()); // Holds current joint positions upon a RT message timeout
       cart_vel_status = ortn_vel_status = jnt_vel_status = jnt_pos_status = cart_pos_status = ortn_pos_status = false;
-      std::cerr << cart_vel_status << " " << ortn_vel_status << " " << jnt_vel_status << " " << jnt_pos_status << " " << cart_pos_status << " " << ortn_pos_status << std::endl;
     }
   }
 
