@@ -1,0 +1,16 @@
+<package>
+  <description brief="wam_examples">
+
+     Package containing wam control examples.
+
+  </description>
+  <author>Kyle Maroney, Barrett Technology Inc.</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/wam_examples</url>
+  <depend package="roscpp"/>
+  <depend package="wam_msgs"/>
+  <depend package="wam_srvs"/>
+</package>
+
+
