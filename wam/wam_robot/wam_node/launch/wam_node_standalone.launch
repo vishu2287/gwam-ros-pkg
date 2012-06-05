@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <launch>
-  <node machine="wam" name="wam_node_standalone" type="wam_node_standalone" pkg="wam_node" output="screen" />
+  <node name="wam_node_standalone" type="wam_node_standalone" pkg="wam_node" output="screen" />
 </launch>

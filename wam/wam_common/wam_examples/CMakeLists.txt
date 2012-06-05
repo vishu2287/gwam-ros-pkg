@@ -11,14 +11,10 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 
 rosbuild_init()
 
+#set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+#set the default path for built libraries to the "lib" directory
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-find_package(Barrett REQUIRED)
-link_directories(${BARRETT_LIB_DIRS})
-include_directories(${BARRETT_INCLUDE_DIRS})
-add_definitions(${BARRETT_DEFINITIONS})
-rosbuild_add_executable(wam_node_guardian src/wam_node_guardian.cpp)
-rosbuild_add_executable(wam_node_standalone src/wam_node_standalone.cpp)
-target_link_libraries(wam_node_guardian ${BARRETT_LIBRARIES})
-target_link_libraries(wam_node_standalone ${BARRETT_LIBRARIES})
+rosbuild_add_executable(jt_example src/jt_example.cpp)
+
