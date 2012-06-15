@@ -36,6 +36,8 @@ bhand/joint_states - Publishes the current angle in radians for each joint of th
 
 wam/jnt_pos_cmd _- type wam_msgs/RTJointPos_
 
+wam/jnt_trq_cmd _- type wam_msgs/RTJointTrq
+
 wam/jnt_vel_cmd _- type wam_msgs/RTJointVel_
 
 wam/cart_pos_cmd _- type wam_msgs/RTCartPos_
@@ -46,7 +48,7 @@ wam/cart_vel_cmd _- type wam_msgs/RTCartVel_
 
 wam/ortn_vel_cmd _- type wam_msgs/RTOrtnVel_  
 
-(TBD)wam/pose_cmd _- type wam_msgs/RTPose_
+wam/pose_vel_cmd _- type wam_msgs/RTPoseVel_
 
 
 === The WAM Node offers the following Service Calls ===
